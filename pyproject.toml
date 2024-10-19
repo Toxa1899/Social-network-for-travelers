@@ -20,6 +20,7 @@ python-decouple = "^3.8"
 psycopg2-binary = "^2.9.10"
 pillow = "^11.0.0"
 pydantic = "^2.9.2"
+pydantic-settings = "^2.6.0"
 
 
 [tool.poetry.group.docker.dependencies]
@@ -32,6 +33,7 @@ python-decouple = "^3.8"
 psycopg2-binary = "^2.9.10"
 pillow = "^11.0.0"
 pydantic = "^2.9.2"
+pydantic-settings = "^2.6.0"
 
 [build-system]
 requires = ["poetry-core"]
