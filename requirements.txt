@@ -2,3 +2,11 @@ pre-commit
 isort
 black
 flake8
+django
+djangorestframework 
+djangorestframework-simplejwt 
+djangorestframework_pagination
+drf-yasg
+python-decouple
+psycopg2-binary
+pillow

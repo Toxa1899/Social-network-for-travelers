@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "social-network-for-travelers"
+version = "0.1.0"
+description = ""
+authors = ["Toxa1899 <ralz9-ralz9@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pre-commit = "^4.0.1"
+isort = "^5.13.2"
+black = "^24.10.0"
+flake8 = "^7.1.1"
+django = "^5.1.2"
+djangorestframework = "^3.15.2"
+djangorestframework-simplejwt = "^5.3.1"
+djangorestframework-pagination = "^1.2"
+drf-yasg = "^1.21.8"
+python-decouple = "^3.8"
+psycopg2-binary = "^2.9.10"
+pillow = "^11.0.0"
+pydantic = "^2.9.2"
+
+
+[tool.poetry.group.docker.dependencies]
+django = "^5.1.2"
+djangorestframework = "^3.15.2"
+djangorestframework-simplejwt = "^5.3.1"
+djangorestframework-pagination = "^1.2"
+drf-yasg = "^1.21.8"
+python-decouple = "^3.8"
+psycopg2-binary = "^2.9.10"
+pillow = "^11.0.0"
+pydantic = "^2.9.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

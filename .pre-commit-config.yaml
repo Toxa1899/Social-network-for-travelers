@@ -1,6 +1,6 @@
 repos:
   - repo : local
-    hoks:
+    hooks:
     - id : isort 
       name : isort
       entry: isort --settings-file ./.isort.cfg .
