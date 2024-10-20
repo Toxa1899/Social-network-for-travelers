@@ -16,17 +16,9 @@ from pathlib import Path
 from core.config import settings
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = settings.SECRET_KEY
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = settings.DEBUG
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
@@ -163,6 +155,7 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=500),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "SIGNING_KEY": settings.JWT_SECRET_KEY.get_secret_value(),
 }
 
 CACHE_MIDDLEWARE_SECONDS = 3
@@ -175,7 +168,7 @@ LOGGING = {
     "formatters": {
         "production": {
             "format": "%(asctime)s [%(levelname)s] %(process)d %(thread)d "
-            "%(pathname)s:%(lineno)d %(message)s"
+            "%(lineno)d %(message)s"
         },
     },
     # ハンドラの設定

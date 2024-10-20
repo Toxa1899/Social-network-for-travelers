@@ -1,3 +1,5 @@
+from typing import ClassVar
+
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -21,6 +23,7 @@ class Settings(BaseSettings):
     SECRET_KEY: SecretStr
     CORS_ALLOWED_ORIGINS: str
     DEBUG: bool
+    JWT_SECRET_KEY: SecretStr = Field(..., env="JWT_SECRET_KEY")
 
 
 settings = Settings()
