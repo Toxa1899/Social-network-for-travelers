@@ -23,6 +23,7 @@ pydantic = "^2.9.2"
 pydantic-settings = "^2.6.0"
 django-cors-headers = "^4.5.0"
 django-filter = "^24.3"
+django-jazzmin = "^3.0.1"
 
 
 [tool.poetry.group.docker.dependencies]
