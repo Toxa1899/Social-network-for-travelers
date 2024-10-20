@@ -10,9 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
-from ..config import settings
+from core.config import settings
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -119,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "Asia/Bishkek"
 
 TIME_ZONE = "UTC"
 
@@ -137,3 +139,66 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+AUTH_USER_MODEL = "account.CustomUser"
+
+
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend"
+    ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+}
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=500),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+}
+
+CACHE_MIDDLEWARE_SECONDS = 3
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    # ログ出力フォーマットの設定
+    "formatters": {
+        "production": {
+            "format": "%(asctime)s [%(levelname)s] %(process)d %(thread)d "
+            "%(pathname)s:%(lineno)d %(message)s"
+        },
+    },
+    # ハンドラの設定
+    "handlers": {
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": "/app.log",
+            "formatter": "production",
+        },
+    },
+    # ロガーの設定
+    "loggers": {
+        # 自分で追加したアプリケーション全般のログを拾うロガー
+        "": {
+            "handlers": ["file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        # Django自身が出力するログ全般を拾うロガー
+        "django": {
+            "handlers": ["file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}

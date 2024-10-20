@@ -12,6 +12,7 @@ class DatabaseSettings(BaseSettings):
     HOST: str
     PORT: int
     SECRET_KEY: SecretStr
+    CORS_ALLOWED_ORIGINS: str
 
 
 settings = DatabaseSettings()

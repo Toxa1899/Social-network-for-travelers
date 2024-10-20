@@ -21,6 +21,8 @@ psycopg2-binary = "^2.9.10"
 pillow = "^11.0.0"
 pydantic = "^2.9.2"
 pydantic-settings = "^2.6.0"
+django-cors-headers = "^4.5.0"
+django-filter = "^24.3"
 
 
 [tool.poetry.group.docker.dependencies]
@@ -34,6 +36,8 @@ psycopg2-binary = "^2.9.10"
 pillow = "^11.0.0"
 pydantic = "^2.9.2"
 pydantic-settings = "^2.6.0"
+django-cors-headers = "^4.5.0"
+django-filter = "^24.3"
 
 [build-system]
 requires = ["poetry-core"]
