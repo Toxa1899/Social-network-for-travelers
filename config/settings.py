@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = settings.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = settings.DEBUG
 
 ALLOWED_HOSTS = ["localhost"]
 
@@ -90,11 +90,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": settings.DB_NAME,
-        "USER": settings.DB_USER,
-        "PASSWORD": settings.DB_PASSWORD,
-        "HOST": settings.HOST,
-        "PORT": settings.PORT,
+        "NAME": settings.db.DB_NAME.get_secret_value(),
+        "USER": settings.db.DB_USER.get_secret_value(),
+        "PASSWORD": settings.db.DB_PASSWORD.get_secret_value(),
+        "HOST": settings.db.DB_HOST,
+        "PORT": settings.db.DB_PORT,
     }
 }
 
@@ -121,9 +121,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "Asia/Bishkek"
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Bishkek"
 
 USE_I18N = True
 
@@ -182,7 +182,7 @@ LOGGING = {
         "file": {
             "level": "INFO",
             "class": "logging.FileHandler",
-            "filename": "/app.log",
+            "filename": "app.log",
             "formatter": "production",
         },
     },
