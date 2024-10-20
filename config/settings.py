@@ -43,9 +43,11 @@ INSTALLED_APPS = [
     # apps
     "applications.account",
     "applications.product",
+    "applications.countries",
 ]
 
 MIDDLEWARE = [
+    "applications.account.middleware.BlockedUserMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",

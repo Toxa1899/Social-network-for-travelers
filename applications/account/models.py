@@ -3,9 +3,6 @@ from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 
 
-# Create your models here.
-
-
 class CustomUserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
         if not email:
@@ -37,8 +34,10 @@ class CustomUserManager(UserManager):
 
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
-    is_active = models.BooleanField(default=True)
     username = None
+    bio = models.TextField(blank=True, null=True)
+    create_posts = models.BooleanField(default=True)
+    is_blocked = models.BooleanField(default=False)
 
     objects = CustomUserManager()
     USERNAME_FIELD = "email"

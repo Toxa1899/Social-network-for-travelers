@@ -23,7 +23,6 @@ class UserRegisterTest(APITestCase):
 
         response = self.client.post(self.url, data, format="json")
 
-        # self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data, "Вы успешно зарегистрировались")
 
@@ -43,4 +42,19 @@ class UserRegisterTest(APITestCase):
         self.assertIn("non_field_errors", response.data)
         self.assertEqual(
             response.data["non_field_errors"][0], "Пароли не совпадают"
+        )
+        self.assertEqual(self.User.objects.count(), 0)
+
+    def test_valid_email(self):
+        data = {
+            "email": "1",
+            "password": "a(FV)4ha[i97_Ck.CR.I<4r",
+            "password2": "a(FV)4ha[i97_Ck.CR.I<4r223",
+        }
+
+        response = self.client.post(self.url, data, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(
+            response.data["email"][0], "Enter a valid email address."
         )
