@@ -36,7 +36,7 @@ class CustomUserManager(UserManager):
 
 
 class CustomUser(AbstractUser):
-    email = models.CharField(unique=True)
+    email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=True)
     username = None
 

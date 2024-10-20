@@ -3,7 +3,8 @@ import logging
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
-
+from django.contrib.auth.password_validation import validate_password
+from rest_framework.validators import ValidationError
 
 User = get_user_model()
 
@@ -13,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 class RegisterSerializers(serializers.ModelSerializer):
     password2 = serializers.CharField(
-        min_length=6, required=True, write_only=True
+        min_length=8, required=True, write_only=True
     )
 
     class Meta:
@@ -25,7 +26,13 @@ class RegisterSerializers(serializers.ModelSerializer):
         p2 = attrs.pop("password2")
 
         if p1 != p2:
-            return serializers.ValidationError("Пароли не совпадают")
+            raise serializers.ValidationError("Пароли не совпадают")
+
+        try:
+            validate_password(p1)
+        except ValidationError as e:
+            raise serializers.ValidationError({list(e.messages)})
+
         return attrs
 
     def create(self, validated_data):
@@ -41,8 +48,8 @@ class DeleteAccountSerializer(serializers.Serializer):
 
 class ChangePasswordSerializers(serializers.Serializer):
     old_password = serializers.CharField(required=True)
-    new_password = serializers.CharField(required=True, min_length=6)
-    new_password_confirm = serializers.CharField(required=True, min_length=6)
+    new_password = serializers.CharField(required=True, min_length=8)
+    new_password_confirm = serializers.CharField(required=True, min_length=8)
 
     def validate_old_password(self, password):
         user = self.context["request"].user
@@ -71,6 +78,11 @@ class ChangePasswordSerializers(serializers.Serializer):
             raise serializers.ValidationError(
                 "Новый пароль совпадает с текущим"
             )
+
+        try:
+            validate_password(new_password)
+        except ValidationError as e:
+            raise serializers.ValidationError({"password": list(e.messages)})
 
         return attrs
 
