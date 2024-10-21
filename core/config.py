@@ -24,6 +24,10 @@ class Settings(BaseSettings):
     CORS_ALLOWED_ORIGINS: str
     DEBUG: bool
     JWT_SECRET_KEY: SecretStr = Field(..., env="JWT_SECRET_KEY")
+    ACCESS_KEY: SecretStr
+    ALLOWED_HOSTS: SecretStr = Field("127.0.0.1", env="JWT_SECRET_KEY")
+    CELERY_BROKER_URL: str = Field("redis://127.0.0.1:6379/0", env="HOST")
+    CELERY_BROKER_TRANSPORT: str = Field("redis", env="HOST")
 
 
 settings = Settings()

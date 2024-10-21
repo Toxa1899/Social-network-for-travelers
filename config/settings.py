@@ -14,14 +14,15 @@ from datetime import timedelta
 from pathlib import Path
 import os
 from core.config import settings
-
+from celery.beat import crontab
+from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = settings.SECRET_KEY
 
 DEBUG = settings.DEBUG
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = settings.ALLOWED_HOSTS.get_secret_value().split(",")
 
 
 # Application definition
@@ -186,20 +187,33 @@ LOGGING = {
             "filename": "app.log",
             "formatter": "production",
         },
+        "console": {
+            "class": "logging.StreamHandler",
+        },
     },
     # ロガーの設定
     "loggers": {
         # 自分で追加したアプリケーション全般のログを拾うロガー
         "": {
-            "handlers": ["file"],
+            "handlers": ["file", "console"],
             "level": "INFO",
             "propagate": False,
         },
         # Django自身が出力するログ全般を拾うロガー
         "django": {
-            "handlers": ["file"],
+            "handlers": ["file", "console"],
             "level": "INFO",
             "propagate": False,
         },
+    },
+}
+
+CELERY_BROKER_URL = settings.CELERY_BROKER_URL
+CELERY_BROKER_TRANSPORT = settings.CELERY_BROKER_TRANSPORT
+
+CELERY_BEAT_SCHEDULE = {
+    "sample_task": {
+        "task": "applications.product.tasks.country_task",
+        "schedule": crontab(minute="*/720"),
     },
 }

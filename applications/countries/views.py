@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .models import Country
+from .serializers import CountriesSerializer
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 
-# Create your views here.
+
+class CountriesModelViewSet(viewsets.ModelViewSet):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    queryset = Country.objects.all()
+    serializer_class = CountriesSerializer
+    pagination_class = None

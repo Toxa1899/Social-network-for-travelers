@@ -1,0 +1,273 @@
+[2024-10-21 09:04:28,035: INFO/MainProcess] beat: Starting...
+[2024-10-21 09:04:28,057: INFO/MainProcess] Scheduler: Sending due task sample_task (applications.product.tasks.country_task)
+[2024-10-21 09:04:33,339: WARNING/MainProcess] /home/janatela/myprojects/Social-network-for-travelers/venv/lib/python3.10/site-packages/celery/worker/consumer/consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-10-21 09:04:33,345: INFO/MainProcess] Connected to redis://127.0.0.1:6379/0
+[2024-10-21 09:04:33,346: WARNING/MainProcess] /home/janatela/myprojects/Social-network-for-travelers/venv/lib/python3.10/site-packages/celery/worker/consumer/consumer.py:508: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-10-21 09:04:33,347: INFO/MainProcess] mingle: searching for neighbors
+[2024-10-21 09:04:34,355: INFO/MainProcess] mingle: all alone
+[2024-10-21 09:04:34,369: INFO/MainProcess] celery@janatela-desktop ready.
+[2024-10-21 09:04:34,374: INFO/MainProcess] Task applications.product.tasks.country_task[d9848ece-e861-4892-8aa8-0c70f0f4a8a1] received
+[2024-10-21 09:04:37,051: INFO/ForkPoolWorker-13] Добавлена новая страна Afghanistan
+[2024-10-21 09:04:37,055: INFO/ForkPoolWorker-13] Добавлена новая страна Åland Islands
+[2024-10-21 09:04:37,061: INFO/ForkPoolWorker-13] Добавлена новая страна Albania
+[2024-10-21 09:04:37,065: INFO/ForkPoolWorker-13] Добавлена новая страна Algeria
+[2024-10-21 09:04:37,069: INFO/ForkPoolWorker-13] Добавлена новая страна American Samoa
+[2024-10-21 09:04:37,073: INFO/ForkPoolWorker-13] Добавлена новая страна Andorra
+[2024-10-21 09:04:37,077: INFO/ForkPoolWorker-13] Добавлена новая страна Angola
+[2024-10-21 09:04:37,081: INFO/ForkPoolWorker-13] Добавлена новая страна Anguilla
+[2024-10-21 09:04:37,084: INFO/ForkPoolWorker-13] Добавлена новая страна Antarctica
+[2024-10-21 09:04:37,088: INFO/ForkPoolWorker-13] Добавлена новая страна Antigua and Barbuda
+[2024-10-21 09:04:37,092: INFO/ForkPoolWorker-13] Добавлена новая страна Argentina
+[2024-10-21 09:04:37,096: INFO/ForkPoolWorker-13] Добавлена новая страна Armenia
+[2024-10-21 09:04:37,099: INFO/ForkPoolWorker-13] Добавлена новая страна Aruba
+[2024-10-21 09:04:37,103: INFO/ForkPoolWorker-13] Добавлена новая страна Australia
+[2024-10-21 09:04:37,107: INFO/ForkPoolWorker-13] Добавлена новая страна Austria
+[2024-10-21 09:04:37,111: INFO/ForkPoolWorker-13] Добавлена новая страна Azerbaijan
+[2024-10-21 09:04:37,115: INFO/ForkPoolWorker-13] Добавлена новая страна Bahamas
+[2024-10-21 09:04:37,118: INFO/ForkPoolWorker-13] Добавлена новая страна Bahrain
+[2024-10-21 09:04:37,122: INFO/ForkPoolWorker-13] Добавлена новая страна Bangladesh
+[2024-10-21 09:04:37,126: INFO/ForkPoolWorker-13] Добавлена новая страна Barbados
+[2024-10-21 09:04:37,130: INFO/ForkPoolWorker-13] Добавлена новая страна Belarus
+[2024-10-21 09:04:37,133: INFO/ForkPoolWorker-13] Добавлена новая страна Belgium
+[2024-10-21 09:04:37,137: INFO/ForkPoolWorker-13] Добавлена новая страна Belize
+[2024-10-21 09:04:37,141: INFO/ForkPoolWorker-13] Добавлена новая страна Benin
+[2024-10-21 09:04:37,144: INFO/ForkPoolWorker-13] Добавлена новая страна Bermuda
+[2024-10-21 09:04:37,148: INFO/ForkPoolWorker-13] Добавлена новая страна Bhutan
+[2024-10-21 09:04:37,152: INFO/ForkPoolWorker-13] Добавлена новая страна Bolivia (Plurinational State of)
+[2024-10-21 09:04:37,156: INFO/ForkPoolWorker-13] Добавлена новая страна Bonaire, Sint Eustatius and Saba
+[2024-10-21 09:04:37,160: INFO/ForkPoolWorker-13] Добавлена новая страна Bosnia and Herzegovina
+[2024-10-21 09:04:37,163: INFO/ForkPoolWorker-13] Добавлена новая страна Botswana
+[2024-10-21 09:04:37,167: INFO/ForkPoolWorker-13] Добавлена новая страна Bouvet Island
+[2024-10-21 09:04:37,171: INFO/ForkPoolWorker-13] Добавлена новая страна Brazil
+[2024-10-21 09:04:37,174: INFO/ForkPoolWorker-13] Добавлена новая страна British Indian Ocean Territory
+[2024-10-21 09:04:37,178: INFO/ForkPoolWorker-13] Добавлена новая страна United States Minor Outlying Islands
+[2024-10-21 09:04:37,182: INFO/ForkPoolWorker-13] Добавлена новая страна Virgin Islands (British)
+[2024-10-21 09:04:37,186: INFO/ForkPoolWorker-13] Добавлена новая страна Virgin Islands (U.S.)
+[2024-10-21 09:04:37,189: INFO/ForkPoolWorker-13] Добавлена новая страна Brunei Darussalam
+[2024-10-21 09:04:37,193: INFO/ForkPoolWorker-13] Добавлена новая страна Bulgaria
+[2024-10-21 09:04:37,197: INFO/ForkPoolWorker-13] Добавлена новая страна Burkina Faso
+[2024-10-21 09:04:37,201: INFO/ForkPoolWorker-13] Добавлена новая страна Burundi
+[2024-10-21 09:04:37,205: INFO/ForkPoolWorker-13] Добавлена новая страна Cambodia
+[2024-10-21 09:04:37,208: INFO/ForkPoolWorker-13] Добавлена новая страна Cameroon
+[2024-10-21 09:04:37,212: INFO/ForkPoolWorker-13] Добавлена новая страна Canada
+[2024-10-21 09:04:37,216: INFO/ForkPoolWorker-13] Добавлена новая страна Cabo Verde
+[2024-10-21 09:04:37,220: INFO/ForkPoolWorker-13] Добавлена новая страна Cayman Islands
+[2024-10-21 09:04:37,223: INFO/ForkPoolWorker-13] Добавлена новая страна Central African Republic
+[2024-10-21 09:04:37,227: INFO/ForkPoolWorker-13] Добавлена новая страна Chad
+[2024-10-21 09:04:37,231: INFO/ForkPoolWorker-13] Добавлена новая страна Chile
+[2024-10-21 09:04:37,234: INFO/ForkPoolWorker-13] Добавлена новая страна China
+[2024-10-21 09:04:37,238: INFO/ForkPoolWorker-13] Добавлена новая страна Christmas Island
+[2024-10-21 09:04:37,242: INFO/ForkPoolWorker-13] Добавлена новая страна Cocos (Keeling) Islands
+[2024-10-21 09:04:37,245: INFO/ForkPoolWorker-13] Добавлена новая страна Colombia
+[2024-10-21 09:04:37,249: INFO/ForkPoolWorker-13] Добавлена новая страна Comoros
+[2024-10-21 09:04:37,253: INFO/ForkPoolWorker-13] Добавлена новая страна Congo
+[2024-10-21 09:04:37,257: INFO/ForkPoolWorker-13] Добавлена новая страна Congo (Democratic Republic of the)
+[2024-10-21 09:04:37,260: INFO/ForkPoolWorker-13] Добавлена новая страна Cook Islands
+[2024-10-21 09:04:37,264: INFO/ForkPoolWorker-13] Добавлена новая страна Costa Rica
+[2024-10-21 09:04:37,268: INFO/ForkPoolWorker-13] Добавлена новая страна Croatia
+[2024-10-21 09:04:37,271: INFO/ForkPoolWorker-13] Добавлена новая страна Cuba
+[2024-10-21 09:04:37,275: INFO/ForkPoolWorker-13] Добавлена новая страна Curaçao
+[2024-10-21 09:04:37,279: INFO/ForkPoolWorker-13] Добавлена новая страна Cyprus
+[2024-10-21 09:04:37,282: INFO/ForkPoolWorker-13] Добавлена новая страна Czech Republic
+[2024-10-21 09:04:37,286: INFO/ForkPoolWorker-13] Добавлена новая страна Denmark
+[2024-10-21 09:04:37,290: INFO/ForkPoolWorker-13] Добавлена новая страна Djibouti
+[2024-10-21 09:04:37,293: INFO/ForkPoolWorker-13] Добавлена новая страна Dominica
+[2024-10-21 09:04:37,297: INFO/ForkPoolWorker-13] Добавлена новая страна Dominican Republic
+[2024-10-21 09:04:37,301: INFO/ForkPoolWorker-13] Добавлена новая страна Ecuador
+[2024-10-21 09:04:37,304: INFO/ForkPoolWorker-13] Добавлена новая страна Egypt
+[2024-10-21 09:04:37,308: INFO/ForkPoolWorker-13] Добавлена новая страна El Salvador
+[2024-10-21 09:04:37,312: INFO/ForkPoolWorker-13] Добавлена новая страна Equatorial Guinea
+[2024-10-21 09:04:37,315: INFO/ForkPoolWorker-13] Добавлена новая страна Eritrea
+[2024-10-21 09:04:37,319: INFO/ForkPoolWorker-13] Добавлена новая страна Estonia
+[2024-10-21 09:04:37,323: INFO/ForkPoolWorker-13] Добавлена новая страна Ethiopia
+[2024-10-21 09:04:37,326: INFO/ForkPoolWorker-13] Добавлена новая страна Falkland Islands (Malvinas)
+[2024-10-21 09:04:37,330: INFO/ForkPoolWorker-13] Добавлена новая страна Faroe Islands
+[2024-10-21 09:04:37,334: INFO/ForkPoolWorker-13] Добавлена новая страна Fiji
+[2024-10-21 09:04:37,338: INFO/ForkPoolWorker-13] Добавлена новая страна Finland
+[2024-10-21 09:04:37,342: INFO/ForkPoolWorker-13] Добавлена новая страна France
+[2024-10-21 09:04:37,345: INFO/ForkPoolWorker-13] Добавлена новая страна French Guiana
+[2024-10-21 09:04:37,349: INFO/ForkPoolWorker-13] Добавлена новая страна French Polynesia
+[2024-10-21 09:04:37,353: INFO/ForkPoolWorker-13] Добавлена новая страна French Southern Territories
+[2024-10-21 09:04:37,356: INFO/ForkPoolWorker-13] Добавлена новая страна Gabon
+[2024-10-21 09:04:37,360: INFO/ForkPoolWorker-13] Добавлена новая страна Gambia
+[2024-10-21 09:04:37,364: INFO/ForkPoolWorker-13] Добавлена новая страна Georgia
+[2024-10-21 09:04:37,368: INFO/ForkPoolWorker-13] Добавлена новая страна Germany
+[2024-10-21 09:04:37,371: INFO/ForkPoolWorker-13] Добавлена новая страна Ghana
+[2024-10-21 09:04:37,375: INFO/ForkPoolWorker-13] Добавлена новая страна Gibraltar
+[2024-10-21 09:04:37,379: INFO/ForkPoolWorker-13] Добавлена новая страна Greece
+[2024-10-21 09:04:37,383: INFO/ForkPoolWorker-13] Добавлена новая страна Greenland
+[2024-10-21 09:04:37,386: INFO/ForkPoolWorker-13] Добавлена новая страна Grenada
+[2024-10-21 09:04:37,390: INFO/ForkPoolWorker-13] Добавлена новая страна Guadeloupe
+[2024-10-21 09:04:37,394: INFO/ForkPoolWorker-13] Добавлена новая страна Guam
+[2024-10-21 09:04:37,397: INFO/ForkPoolWorker-13] Добавлена новая страна Guatemala
+[2024-10-21 09:04:37,401: INFO/ForkPoolWorker-13] Добавлена новая страна Guernsey
+[2024-10-21 09:04:37,404: INFO/ForkPoolWorker-13] Добавлена новая страна Guinea
+[2024-10-21 09:04:37,408: INFO/ForkPoolWorker-13] Добавлена новая страна Guinea-Bissau
+[2024-10-21 09:04:37,412: INFO/ForkPoolWorker-13] Добавлена новая страна Guyana
+[2024-10-21 09:04:37,416: INFO/ForkPoolWorker-13] Добавлена новая страна Haiti
+[2024-10-21 09:04:37,419: INFO/ForkPoolWorker-13] Добавлена новая страна Heard Island and McDonald Islands
+[2024-10-21 09:04:37,423: INFO/ForkPoolWorker-13] Добавлена новая страна Holy See
+[2024-10-21 09:04:37,427: INFO/ForkPoolWorker-13] Добавлена новая страна Honduras
+[2024-10-21 09:04:37,430: INFO/ForkPoolWorker-13] Добавлена новая страна Hong Kong
+[2024-10-21 09:04:37,434: INFO/ForkPoolWorker-13] Добавлена новая страна Hungary
+[2024-10-21 09:04:37,439: INFO/ForkPoolWorker-13] Добавлена новая страна Iceland
+[2024-10-21 09:04:37,443: INFO/ForkPoolWorker-13] Добавлена новая страна India
+[2024-10-21 09:04:37,447: INFO/ForkPoolWorker-13] Добавлена новая страна Indonesia
+[2024-10-21 09:04:37,451: INFO/ForkPoolWorker-13] Добавлена новая страна Côte d'Ivoire
+[2024-10-21 09:04:37,455: INFO/ForkPoolWorker-13] Добавлена новая страна Iran (Islamic Republic of)
+[2024-10-21 09:04:37,460: INFO/ForkPoolWorker-13] Добавлена новая страна Iraq
+[2024-10-21 09:04:37,464: INFO/ForkPoolWorker-13] Добавлена новая страна Ireland
+[2024-10-21 09:04:37,468: INFO/ForkPoolWorker-13] Добавлена новая страна Isle of Man
+[2024-10-21 09:04:37,473: INFO/ForkPoolWorker-13] Добавлена новая страна Israel
+[2024-10-21 09:04:37,477: INFO/ForkPoolWorker-13] Добавлена новая страна Italy
+[2024-10-21 09:04:37,481: INFO/ForkPoolWorker-13] Добавлена новая страна Jamaica
+[2024-10-21 09:04:37,486: INFO/ForkPoolWorker-13] Добавлена новая страна Japan
+[2024-10-21 09:04:37,490: INFO/ForkPoolWorker-13] Добавлена новая страна Jersey
+[2024-10-21 09:04:37,494: INFO/ForkPoolWorker-13] Добавлена новая страна Jordan
+[2024-10-21 09:04:37,498: INFO/ForkPoolWorker-13] Добавлена новая страна Kazakhstan
+[2024-10-21 09:04:37,501: INFO/ForkPoolWorker-13] Добавлена новая страна Kenya
+[2024-10-21 09:04:37,505: INFO/ForkPoolWorker-13] Добавлена новая страна Kiribati
+[2024-10-21 09:04:37,508: INFO/ForkPoolWorker-13] Добавлена новая страна Kuwait
+[2024-10-21 09:04:37,512: INFO/ForkPoolWorker-13] Добавлена новая страна Kyrgyzstan
+[2024-10-21 09:04:37,515: INFO/ForkPoolWorker-13] Добавлена новая страна Lao People's Democratic Republic
+[2024-10-21 09:04:37,519: INFO/ForkPoolWorker-13] Добавлена новая страна Latvia
+[2024-10-21 09:04:37,523: INFO/ForkPoolWorker-13] Добавлена новая страна Lebanon
+[2024-10-21 09:04:37,527: INFO/ForkPoolWorker-13] Добавлена новая страна Lesotho
+[2024-10-21 09:04:37,530: INFO/ForkPoolWorker-13] Добавлена новая страна Liberia
+[2024-10-21 09:04:37,534: INFO/ForkPoolWorker-13] Добавлена новая страна Libya
+[2024-10-21 09:04:37,538: INFO/ForkPoolWorker-13] Добавлена новая страна Liechtenstein
+[2024-10-21 09:04:37,543: INFO/ForkPoolWorker-13] Добавлена новая страна Lithuania
+[2024-10-21 09:04:37,547: INFO/ForkPoolWorker-13] Добавлена новая страна Luxembourg
+[2024-10-21 09:04:37,551: INFO/ForkPoolWorker-13] Добавлена новая страна Macao
+[2024-10-21 09:04:37,555: INFO/ForkPoolWorker-13] Добавлена новая страна Macedonia (the former Yugoslav Republic of)
+[2024-10-21 09:04:37,559: INFO/ForkPoolWorker-13] Добавлена новая страна Madagascar
+[2024-10-21 09:04:37,563: INFO/ForkPoolWorker-13] Добавлена новая страна Malawi
+[2024-10-21 09:04:37,568: INFO/ForkPoolWorker-13] Добавлена новая страна Malaysia
+[2024-10-21 09:04:37,572: INFO/ForkPoolWorker-13] Добавлена новая страна Maldives
+[2024-10-21 09:04:37,576: INFO/ForkPoolWorker-13] Добавлена новая страна Mali
+[2024-10-21 09:04:37,581: INFO/ForkPoolWorker-13] Добавлена новая страна Malta
+[2024-10-21 09:04:37,585: INFO/ForkPoolWorker-13] Добавлена новая страна Marshall Islands
+[2024-10-21 09:04:37,589: INFO/ForkPoolWorker-13] Добавлена новая страна Martinique
+[2024-10-21 09:04:37,594: INFO/ForkPoolWorker-13] Добавлена новая страна Mauritania
+[2024-10-21 09:04:37,597: INFO/ForkPoolWorker-13] Добавлена новая страна Mauritius
+[2024-10-21 09:04:37,601: INFO/ForkPoolWorker-13] Добавлена новая страна Mayotte
+[2024-10-21 09:04:37,605: INFO/ForkPoolWorker-13] Добавлена новая страна Mexico
+[2024-10-21 09:04:37,610: INFO/ForkPoolWorker-13] Добавлена новая страна Micronesia (Federated States of)
+[2024-10-21 09:04:37,614: INFO/ForkPoolWorker-13] Добавлена новая страна Moldova (Republic of)
+[2024-10-21 09:04:37,619: INFO/ForkPoolWorker-13] Добавлена новая страна Monaco
+[2024-10-21 09:04:37,623: INFO/ForkPoolWorker-13] Добавлена новая страна Mongolia
+[2024-10-21 09:04:37,628: INFO/ForkPoolWorker-13] Добавлена новая страна Montenegro
+[2024-10-21 09:04:37,632: INFO/ForkPoolWorker-13] Добавлена новая страна Montserrat
+[2024-10-21 09:04:37,635: INFO/ForkPoolWorker-13] Добавлена новая страна Morocco
+[2024-10-21 09:04:37,639: INFO/ForkPoolWorker-13] Добавлена новая страна Mozambique
+[2024-10-21 09:04:37,643: INFO/ForkPoolWorker-13] Добавлена новая страна Myanmar
+[2024-10-21 09:04:37,647: INFO/ForkPoolWorker-13] Добавлена новая страна Namibia
+[2024-10-21 09:04:37,651: INFO/ForkPoolWorker-13] Добавлена новая страна Nauru
+[2024-10-21 09:04:37,655: INFO/ForkPoolWorker-13] Добавлена новая страна Nepal
+[2024-10-21 09:04:37,659: INFO/ForkPoolWorker-13] Добавлена новая страна Netherlands
+[2024-10-21 09:04:37,663: INFO/ForkPoolWorker-13] Добавлена новая страна New Caledonia
+[2024-10-21 09:04:37,667: INFO/ForkPoolWorker-13] Добавлена новая страна New Zealand
+[2024-10-21 09:04:37,670: INFO/ForkPoolWorker-13] Добавлена новая страна Nicaragua
+[2024-10-21 09:04:37,674: INFO/ForkPoolWorker-13] Добавлена новая страна Niger
+[2024-10-21 09:04:37,678: INFO/ForkPoolWorker-13] Добавлена новая страна Nigeria
+[2024-10-21 09:04:37,682: INFO/ForkPoolWorker-13] Добавлена новая страна Niue
+[2024-10-21 09:04:37,686: INFO/ForkPoolWorker-13] Добавлена новая страна Norfolk Island
+[2024-10-21 09:04:37,689: INFO/ForkPoolWorker-13] Добавлена новая страна Korea (Democratic People's Republic of)
+[2024-10-21 09:04:37,693: INFO/ForkPoolWorker-13] Добавлена новая страна Northern Mariana Islands
+[2024-10-21 09:04:37,697: INFO/ForkPoolWorker-13] Добавлена новая страна Norway
+[2024-10-21 09:04:37,701: INFO/ForkPoolWorker-13] Добавлена новая страна Oman
+[2024-10-21 09:04:37,705: INFO/ForkPoolWorker-13] Добавлена новая страна Pakistan
+[2024-10-21 09:04:37,708: INFO/ForkPoolWorker-13] Добавлена новая страна Palau
+[2024-10-21 09:04:37,712: INFO/ForkPoolWorker-13] Добавлена новая страна Palestine, State of
+[2024-10-21 09:04:37,716: INFO/ForkPoolWorker-13] Добавлена новая страна Panama
+[2024-10-21 09:04:37,719: INFO/ForkPoolWorker-13] Добавлена новая страна Papua New Guinea
+[2024-10-21 09:04:37,723: INFO/ForkPoolWorker-13] Добавлена новая страна Paraguay
+[2024-10-21 09:04:37,727: INFO/ForkPoolWorker-13] Добавлена новая страна Peru
+[2024-10-21 09:04:37,731: INFO/ForkPoolWorker-13] Добавлена новая страна Philippines
+[2024-10-21 09:04:37,735: INFO/ForkPoolWorker-13] Добавлена новая страна Pitcairn
+[2024-10-21 09:04:37,739: INFO/ForkPoolWorker-13] Добавлена новая страна Poland
+[2024-10-21 09:04:37,743: INFO/ForkPoolWorker-13] Добавлена новая страна Portugal
+[2024-10-21 09:04:37,746: INFO/ForkPoolWorker-13] Добавлена новая страна Puerto Rico
+[2024-10-21 09:04:37,750: INFO/ForkPoolWorker-13] Добавлена новая страна Qatar
+[2024-10-21 09:04:37,754: INFO/ForkPoolWorker-13] Добавлена новая страна Republic of Kosovo
+[2024-10-21 09:04:37,758: INFO/ForkPoolWorker-13] Добавлена новая страна Réunion
+[2024-10-21 09:04:37,762: INFO/ForkPoolWorker-13] Добавлена новая страна Romania
+[2024-10-21 09:04:37,765: INFO/ForkPoolWorker-13] Добавлена новая страна Russian Federation
+[2024-10-21 09:04:37,769: INFO/ForkPoolWorker-13] Добавлена новая страна Rwanda
+[2024-10-21 09:04:37,773: INFO/ForkPoolWorker-13] Добавлена новая страна Saint Barthélemy
+[2024-10-21 09:04:37,777: INFO/ForkPoolWorker-13] Добавлена новая страна Saint Helena, Ascension and Tristan da Cunha
+[2024-10-21 09:04:37,780: INFO/ForkPoolWorker-13] Добавлена новая страна Saint Kitts and Nevis
+[2024-10-21 09:04:37,784: INFO/ForkPoolWorker-13] Добавлена новая страна Saint Lucia
+[2024-10-21 09:04:37,788: INFO/ForkPoolWorker-13] Добавлена новая страна Saint Martin (French part)
+[2024-10-21 09:04:37,792: INFO/ForkPoolWorker-13] Добавлена новая страна Saint Pierre and Miquelon
+[2024-10-21 09:04:37,796: INFO/ForkPoolWorker-13] Добавлена новая страна Saint Vincent and the Grenadines
+[2024-10-21 09:04:37,800: INFO/ForkPoolWorker-13] Добавлена новая страна Samoa
+[2024-10-21 09:04:37,804: INFO/ForkPoolWorker-13] Добавлена новая страна San Marino
+[2024-10-21 09:04:37,808: INFO/ForkPoolWorker-13] Добавлена новая страна Sao Tome and Principe
+[2024-10-21 09:04:37,811: INFO/ForkPoolWorker-13] Добавлена новая страна Saudi Arabia
+[2024-10-21 09:04:37,815: INFO/ForkPoolWorker-13] Добавлена новая страна Senegal
+[2024-10-21 09:04:37,819: INFO/ForkPoolWorker-13] Добавлена новая страна Serbia
+[2024-10-21 09:04:37,823: INFO/ForkPoolWorker-13] Добавлена новая страна Seychelles
+[2024-10-21 09:04:37,826: INFO/ForkPoolWorker-13] Добавлена новая страна Sierra Leone
+[2024-10-21 09:04:37,830: INFO/ForkPoolWorker-13] Добавлена новая страна Singapore
+[2024-10-21 09:04:37,834: INFO/ForkPoolWorker-13] Добавлена новая страна Sint Maarten (Dutch part)
+[2024-10-21 09:04:37,838: INFO/ForkPoolWorker-13] Добавлена новая страна Slovakia
+[2024-10-21 09:04:37,842: INFO/ForkPoolWorker-13] Добавлена новая страна Slovenia
+[2024-10-21 09:04:37,846: INFO/ForkPoolWorker-13] Добавлена новая страна Solomon Islands
+[2024-10-21 09:04:37,849: INFO/ForkPoolWorker-13] Добавлена новая страна Somalia
+[2024-10-21 09:04:37,853: INFO/ForkPoolWorker-13] Добавлена новая страна South Africa
+[2024-10-21 09:04:37,857: INFO/ForkPoolWorker-13] Добавлена новая страна South Georgia and the South Sandwich Islands
+[2024-10-21 09:04:37,861: INFO/ForkPoolWorker-13] Добавлена новая страна Korea (Republic of)
+[2024-10-21 09:04:37,865: INFO/ForkPoolWorker-13] Добавлена новая страна South Sudan
+[2024-10-21 09:04:37,869: INFO/ForkPoolWorker-13] Добавлена новая страна Spain
+[2024-10-21 09:04:37,872: INFO/ForkPoolWorker-13] Добавлена новая страна Sri Lanka
+[2024-10-21 09:04:37,876: INFO/ForkPoolWorker-13] Добавлена новая страна Sudan
+[2024-10-21 09:04:37,880: INFO/ForkPoolWorker-13] Добавлена новая страна Suriname
+[2024-10-21 09:04:37,884: INFO/ForkPoolWorker-13] Добавлена новая страна Svalbard and Jan Mayen
+[2024-10-21 09:04:37,888: INFO/ForkPoolWorker-13] Добавлена новая страна Swaziland
+[2024-10-21 09:04:37,891: INFO/ForkPoolWorker-13] Добавлена новая страна Sweden
+[2024-10-21 09:04:37,895: INFO/ForkPoolWorker-13] Добавлена новая страна Switzerland
+[2024-10-21 09:04:37,899: INFO/ForkPoolWorker-13] Добавлена новая страна Syrian Arab Republic
+[2024-10-21 09:04:37,903: INFO/ForkPoolWorker-13] Добавлена новая страна Taiwan
+[2024-10-21 09:04:37,907: INFO/ForkPoolWorker-13] Добавлена новая страна Tajikistan
+[2024-10-21 09:04:37,911: INFO/ForkPoolWorker-13] Добавлена новая страна Tanzania, United Republic of
+[2024-10-21 09:04:37,915: INFO/ForkPoolWorker-13] Добавлена новая страна Thailand
+[2024-10-21 09:04:37,919: INFO/ForkPoolWorker-13] Добавлена новая страна Timor-Leste
+[2024-10-21 09:04:37,922: INFO/ForkPoolWorker-13] Добавлена новая страна Togo
+[2024-10-21 09:04:37,926: INFO/ForkPoolWorker-13] Добавлена новая страна Tokelau
+[2024-10-21 09:04:37,930: INFO/ForkPoolWorker-13] Добавлена новая страна Tonga
+[2024-10-21 09:04:37,934: INFO/ForkPoolWorker-13] Добавлена новая страна Trinidad and Tobago
+[2024-10-21 09:04:37,938: INFO/ForkPoolWorker-13] Добавлена новая страна Tunisia
+[2024-10-21 09:04:37,942: INFO/ForkPoolWorker-13] Добавлена новая страна Turkey
+[2024-10-21 09:04:37,946: INFO/ForkPoolWorker-13] Добавлена новая страна Turkmenistan
+[2024-10-21 09:04:37,950: INFO/ForkPoolWorker-13] Добавлена новая страна Turks and Caicos Islands
+[2024-10-21 09:04:37,954: INFO/ForkPoolWorker-13] Добавлена новая страна Tuvalu
+[2024-10-21 09:04:37,957: INFO/ForkPoolWorker-13] Добавлена новая страна Uganda
+[2024-10-21 09:04:37,961: INFO/ForkPoolWorker-13] Добавлена новая страна Ukraine
+[2024-10-21 09:04:37,965: INFO/ForkPoolWorker-13] Добавлена новая страна United Arab Emirates
+[2024-10-21 09:04:37,969: INFO/ForkPoolWorker-13] Добавлена новая страна United Kingdom of Great Britain and Northern Ireland
+[2024-10-21 09:04:37,972: INFO/ForkPoolWorker-13] Добавлена новая страна United States of America
+[2024-10-21 09:04:37,976: INFO/ForkPoolWorker-13] Добавлена новая страна Uruguay
+[2024-10-21 09:04:37,980: INFO/ForkPoolWorker-13] Добавлена новая страна Uzbekistan
+[2024-10-21 09:04:37,984: INFO/ForkPoolWorker-13] Добавлена новая страна Vanuatu
+[2024-10-21 09:04:37,988: INFO/ForkPoolWorker-13] Добавлена новая страна Venezuela (Bolivarian Republic of)
+[2024-10-21 09:04:37,992: INFO/ForkPoolWorker-13] Добавлена новая страна Viet Nam
+[2024-10-21 09:04:37,995: INFO/ForkPoolWorker-13] Добавлена новая страна Wallis and Futuna
+[2024-10-21 09:04:37,999: INFO/ForkPoolWorker-13] Добавлена новая страна Western Sahara
+[2024-10-21 09:04:38,003: INFO/ForkPoolWorker-13] Добавлена новая страна Yemen
+[2024-10-21 09:04:38,007: INFO/ForkPoolWorker-13] Добавлена новая страна Zambia
+[2024-10-21 09:04:38,011: INFO/ForkPoolWorker-13] Добавлена новая страна Zimbabwe
+[2024-10-21 09:04:38,012: INFO/ForkPoolWorker-13] Task applications.product.tasks.country_task[d9848ece-e861-4892-8aa8-0c70f0f4a8a1] succeeded in 3.636184406990651s: None
+[2024-10-21 09:05:00,022: INFO/MainProcess] Scheduler: Sending due task sample_task (applications.product.tasks.country_task)
+[2024-10-21 09:05:00,025: INFO/MainProcess] Task applications.product.tasks.country_task[85069f56-c60a-4806-993b-927897e74f8f] received
+[2024-10-21 09:05:03,018: INFO/ForkPoolWorker-13] Task applications.product.tasks.country_task[85069f56-c60a-4806-993b-927897e74f8f] succeeded in 2.991356377999182s: None
