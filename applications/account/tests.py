@@ -58,3 +58,14 @@ class UserRegisterTest(APITestCase):
         self.assertEqual(
             response.data["email"][0], "Enter a valid email address."
         )
+
+    def test_lenght(self):
+        data = {
+            "email": "testuser@gmail.com",
+            "password": "a1",
+            "password2": "a1",
+        }
+
+        response = self.client.post(self.url, data, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

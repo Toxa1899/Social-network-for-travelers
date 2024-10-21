@@ -9,13 +9,24 @@ User = get_user_model()
 
 class Subscription(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="subscriptions"
+        User,
+        on_delete=models.CASCADE,
+        related_name="subscriptions",
+        verbose_name="Пользователь",
     )
     country = models.ForeignKey(
-        Country, null=True, blank=True, on_delete=models.CASCADE
+        Country,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        verbose_name="Страна",
     )
     tag = models.ForeignKey(
-        Tag, null=True, blank=True, on_delete=models.CASCADE
+        Tag,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        verbose_name="Тег",
     )
     subscribed_user = models.ForeignKey(
         User,
@@ -23,7 +34,10 @@ class Subscription(models.Model):
         blank=True,
         related_name="followers",
         on_delete=models.CASCADE,
+        verbose_name="подписанный пользователь",
     )
 
     class Meta:
         unique_together = ("user", "country", "tag", "subscribed_user")
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подписки"

@@ -35,9 +35,13 @@ class CustomUserManager(UserManager):
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     username = None
-    bio = models.TextField(blank=True, null=True)
-    create_posts = models.BooleanField(default=True)
-    is_blocked = models.BooleanField(default=False)
+    bio = models.TextField(blank=True, null=True, verbose_name="Био")
+    create_posts = models.BooleanField(
+        default=True, verbose_name="Может ли создавать посты"
+    )
+    is_blocked = models.BooleanField(
+        default=False, verbose_name="Есть ли доступ"
+    )
 
     objects = CustomUserManager()
     USERNAME_FIELD = "email"

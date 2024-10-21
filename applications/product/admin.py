@@ -1,4 +1,66 @@
 from django.contrib import admin
+from .models import (
+    Tag,
+    Post,
+    PostImage,
+    Comment,
+    Rating,
+    LiftLog,
+    PostLiftSettings,
+)
 
 
-# Register your models here.
+class PostImageInline(admin.TabularInline):
+    model = PostImage
+    extra = 1
+    max_num = 10
+
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = [
+        "author",
+        "country",
+        "title",
+        "body",
+        "created_at",
+        "updated_at",
+        "is_visible",
+    ]
+    list_filter = ("is_visible", "created_at", "author", "country")
+    search_fields = ("title", "body", "author__email")
+    inlines = [PostImageInline]
+    ordering = ["-created_at"]
+    list_editable = ("is_visible",)
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    search_fields = ("name",)
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ("post", "author", "created_at", "content")
+    search_fields = ("post__title", "author__email", "content")
+    list_filter = ("created_at",)
+
+
+@admin.register(Rating)
+class RatingAdmin(admin.ModelAdmin):
+    list_display = ("post", "user", "rating", "created_at")
+    search_fields = ("post__title", "user__email")
+    list_filter = ("created_at", "rating")
+
+
+@admin.register(LiftLog)
+class LiftLogAdmin(admin.ModelAdmin):
+    list_display = ("post", "timestamp")
+    search_fields = ("post__title",)
+    list_filter = ("timestamp",)
+
+
+@admin.register(PostLiftSettings)
+class PostLiftSettingsAdmin(admin.ModelAdmin):
+    list_display = ("post", "start_date", "end_date", "time", "days_of_week")
+    search_fields = ("post__title",)
