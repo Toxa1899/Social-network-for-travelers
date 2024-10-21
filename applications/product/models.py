@@ -16,6 +16,9 @@ class Tag(models.Model):
         verbose_name = "Тег"
         verbose_name_plural = "Теги"
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Post(models.Model):
     author = models.ForeignKey(
@@ -30,13 +33,16 @@ class Post(models.Model):
         related_name="posts",
         verbose_name="Страна",
     )
-    title = models.CharField(max_length=255, verbose_name="заголовок")
+    topic = models.CharField(max_length=255, verbose_name="тема поста")
+
     body = models.TextField(
         validators=[MinLengthValidator(3)], verbose_name="Текст"
     )
+
     tags = models.ManyToManyField(
         Tag, blank=True, null=True, related_name="posts", verbose_name="Тег"
     )
+
     created_at = models.DateTimeField(
         auto_now_add=True, null=True, verbose_name="Дата создания"
     )
