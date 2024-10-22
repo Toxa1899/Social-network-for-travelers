@@ -117,8 +117,8 @@ class Rating(models.Model):
         verbose_name="Пост",
     )
 
-    rating = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)],
+    rating = models.IntegerField(
+        default=0,
         blank=True,
         null=True,
         verbose_name="Рейтинг",
