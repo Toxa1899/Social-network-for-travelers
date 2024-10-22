@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from .models import Post, PostImage, Tag
 from applications.countries.models import Country
+from PIL import Image
+from core.config import settings
+from applications.countries.serializers import CountriesSerializer
 
 
 class PostImageSerializer(serializers.ModelSerializer):
@@ -17,10 +20,28 @@ class PostSerializer(serializers.ModelSerializer):
     image_files = serializers.ListField(
         child=serializers.ImageField(), write_only=True, required=False
     )
+    country = serializers.PrimaryKeyRelatedField(
+        queryset=Country.objects.all()
+    )
 
     class Meta:
         model = Post
         fields = ["country", "topic", "body", "tags", "images", "image_files"]
+
+    def validate_image_files(self, image_files):
+        if image_files:
+            if len(image_files) >= 10:
+                raise serializers.ValidationError(
+                    "Количество изображений не может превышать 10 шт"
+                )
+            for i in image_files:
+                filesize = int(i.size)
+                if filesize > settings.MEGABYTE_LIMIT * 1024 * 1024:
+                    raise serializers.ValidationError(
+                        "Фотография весит больше 5мб"
+                    )
+
+        return image_files
 
     def create(self, validated_data):
         tags_data = validated_data.pop("tags", None)

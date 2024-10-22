@@ -28,6 +28,7 @@ class Settings(BaseSettings):
     ALLOWED_HOSTS: SecretStr = Field("127.0.0.1", env="JWT_SECRET_KEY")
     CELERY_BROKER_URL: str = Field("redis://127.0.0.1:6379/0", env="HOST")
     CELERY_BROKER_TRANSPORT: str = Field("redis", env="HOST")
+    MEGABYTE_LIMIT: int = Field(5, env="MEGABYTE_LIMIT")
 
 
 settings = Settings()
