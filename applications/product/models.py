@@ -69,12 +69,6 @@ class PostImage(models.Model):
         verbose_name="К какому посту относится Img",
     )
 
-    # def clean(self):
-    #     if self.image.size > 5 * 1024 * 1024:
-    #         raise ValidationError("Максимальный размер изображения: 5Мб")
-    #     if self.post and self.post.post_images.count() >= 10:
-    #         raise ValidationError("Максимум 10 изображений")
-
     class Meta:
         verbose_name = "Img поста"
         verbose_name_plural = "Img постов"

@@ -24,7 +24,15 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ["country", "topic", "body", "tags", "images", "image_files"]
+        fields = [
+            "id",
+            "country",
+            "topic",
+            "body",
+            "tags",
+            "images",
+            "image_files",
+        ]
 
     def validate_image_files(self, image_files):
         if image_files:
