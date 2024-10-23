@@ -14,17 +14,16 @@ from rest_framework.response import Response
 from config.mixins import GlobalContextMixin
 
 
-class CountriesAllModelViewSet(
-    GlobalContextMixin, viewsets.ReadOnlyModelViewSet
-):
+class CountriesAllModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
     permission_classes = [
         IsNotBlocked,
-        IsNotAdmin,
+        DjangoModelPermissionsOrAnonReadOnly,
         IsAuthenticated,
     ]
 
     queryset = Country.objects.all()
     serializer_class = CountriesSerializer
+    pagination_class = None
 
 
 class CountriesModelViewSet(GlobalContextMixin, viewsets.ReadOnlyModelViewSet):
@@ -39,7 +38,6 @@ class CountriesModelViewSet(GlobalContextMixin, viewsets.ReadOnlyModelViewSet):
         .filter(post_count__gt=0)
         .order_by("name")
     )
-    pagination_class = None
 
     def retrieve(self, request, *args, **kwargs):
         country = self.get_object()

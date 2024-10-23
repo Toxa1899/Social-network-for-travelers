@@ -2,6 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import (
     IsAuthenticated,
     IsAuthenticatedOrReadOnly,
+    IsAdminUser,
 )
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -21,6 +22,8 @@ from .serializers import (
 from .decorators import rating_schema, comment_schema
 from applications.subscriptions.models import Subscription
 from config.mixins import GlobalContextMixin
+from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
 
 
 class PostModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
@@ -122,3 +125,24 @@ class MainViewSet(GlobalContextMixin, viewsets.ReadOnlyModelViewSet):
             )[:10]
 
         return queryset
+
+
+class DisablePost(APIView):
+    """
+    Представление для для отключения поста ,
+    с доступностью только для админов
+    """
+
+    permission_classes = [IsAdminUser]
+
+    def post(self, request, pk):
+        """
+        две последовательности вкл и выкл (on , off)
+        """
+        post = get_object_or_404(Post, id=pk)
+        status = None
+        visible = not post.is_visible
+        status = "on" if visible else "off"
+        post.is_visible = visible
+        post.save()
+        return Response(f"{status}")
