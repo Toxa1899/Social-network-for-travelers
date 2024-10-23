@@ -4,13 +4,52 @@ from applications.countries.models import Country
 from core.config import settings
 
 
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ["id", "content", "post"]
+
+
 class PostImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = PostImage
         fields = ["image"]
 
 
+class PostDetailSerializer(serializers.ModelSerializer):
+    comment = CommentSerializer(source="comments", many=True)
+    images = PostImageSerializer(
+        source="post_images", many=True, read_only=True
+    )
+    tags = serializers.CharField(required=False)
+    image_files = serializers.ListField(
+        child=serializers.ImageField(), write_only=True, required=False
+    )
+    country = serializers.PrimaryKeyRelatedField(
+        queryset=Country.objects.all()
+    )
+
+    class Meta:
+        model = Post
+        fields = [
+            "id",
+            "country",
+            "topic",
+            "body",
+            "tags",
+            "images",
+            "image_files",
+            "comment",
+        ]
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["tags"] = [tag.name for tag in instance.tags.all()]
+        return representation
+
+
 class PostSerializer(serializers.ModelSerializer):
+
     images = PostImageSerializer(
         source="post_images", many=True, read_only=True
     )
@@ -75,10 +114,3 @@ class PostSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation["tags"] = [tag.name for tag in instance.tags.all()]
         return representation
-
-
-class CommentSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Comment
-        fields = ["id", "content", "post"]

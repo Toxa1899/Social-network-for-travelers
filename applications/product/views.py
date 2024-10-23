@@ -13,7 +13,11 @@ from permissions.permissions import (
     IsNotBlocked,
     IsNotAdmin,
 )
-from .serializers import PostSerializer, CommentSerializer
+from .serializers import (
+    PostSerializer,
+    CommentSerializer,
+    PostDetailSerializer,
+)
 from .decorators import rating_schema, comment_schema
 from applications.subscriptions.models import Subscription
 
@@ -29,6 +33,11 @@ class PostModelViewSet(viewsets.ModelViewSet):
     ]
     queryset = Post.objects.filter(is_visible=True).order_by("-created_at")
     serializer_class = PostSerializer
+
+    def get_serializer_class(self):
+        if self.action == "retrieve":
+            return PostDetailSerializer
+        return PostSerializer
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
