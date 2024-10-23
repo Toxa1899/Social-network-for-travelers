@@ -215,7 +215,7 @@ CELERY_BROKER_TRANSPORT = settings.CELERY_BROKER_TRANSPORT
 
 CELERY_BEAT_SCHEDULE = {
     "sample_task": {
-        "task": "applications.product.tasks.country_task",
+        "task": "applications.countries.tasks.country_task",
         "schedule": crontab(minute="*/720"),
     },
 }

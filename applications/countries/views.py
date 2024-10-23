@@ -15,6 +15,10 @@ from config.mixins import GlobalContextMixin
 
 
 class CountriesAllModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
+    """
+    Все страны , Get для всех , Остально только для  админов
+    """
+
     permission_classes = [
         IsNotBlocked,
         DjangoModelPermissionsOrAnonReadOnly,
@@ -27,6 +31,10 @@ class CountriesAllModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
 
 
 class CountriesModelViewSet(GlobalContextMixin, viewsets.ReadOnlyModelViewSet):
+    """
+    Список тех стран, для которых был создан один и более пост
+    """
+
     permission_classes = [
         IsNotBlocked,
         IsNotAdmin,

@@ -104,7 +104,7 @@ class DeleteAccountAPIView(APIView):
                     f"Неверный пароль для удаления аккаунта '{request.user.email}' "
                 )
                 return Response(
-                    "Неверный пароль для удаления аккаунта.",
+                    "Неверный пароль для удаления аккаунта",
                     status=status.HTTP_400_BAD_REQUEST,
                 )
         else:
@@ -205,7 +205,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     def get_serializer_class(self):
         """
         какой сериализатор будет использоватся ,
-        все зависит от запроса
+         зависит от запроса (get or get -> <int:id>)
         """
         if self.action == "list":
             return UserListSerializer
