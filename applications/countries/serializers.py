@@ -3,6 +3,8 @@ from .models import Country
 
 
 class CountriesSerializer(serializers.ModelSerializer):
+    post_count = serializers.IntegerField(source="posts.count", read_only=True)
+
     class Meta:
         model = Country
-        fields = "__all__"
+        fields = ["id", "name", "description", "post_count"]
