@@ -36,11 +36,6 @@ class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     username = None
     bio = models.TextField(blank=True, null=True, verbose_name="Био")
-
-    is_blocked = models.BooleanField(
-        default=True, verbose_name="Есть ли доступ"
-    )
-
     objects = CustomUserManager()
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -52,3 +47,4 @@ class CustomUser(AbstractUser):
 class BlockedUser(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     can_create_posts = models.BooleanField(default=True)
+    is_blocked = models.BooleanField(default=False)

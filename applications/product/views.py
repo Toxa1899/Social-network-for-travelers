@@ -15,6 +15,7 @@ from permissions.permissions import (
 )
 from .serializers import PostSerializer, CommentSerializer
 from .decorators import rating_schema, comment_schema
+from applications.subscriptions.models import Subscription
 
 
 class PostModelViewSet(viewsets.ModelViewSet):
@@ -22,6 +23,7 @@ class PostModelViewSet(viewsets.ModelViewSet):
         IsAuthenticatedOrReadOnly,
         IsAuthorOrReadOnly,
         BlockCreatePosts,
+        IsAuthenticated,
         IsNotBlocked,
         IsNotAdmin,
     ]
@@ -78,3 +80,36 @@ class CommentModelViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+
+class MainViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = PostSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly, IsNotBlocked, IsNotAdmin]
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.is_authenticated:
+            subscriptions = Subscription.objects.filter(user=user)
+            country_ids = subscriptions.values_list("country_id", flat=True)
+            tag_ids = subscriptions.values_list("tag_id", flat=True)
+            subscribed_user_ids = subscriptions.values_list(
+                "subscribed_user_id", flat=True
+            )
+
+            queryset = (
+                Post.objects.filter(
+                    Q(is_visible=True),
+                    Q(country_id__in=country_ids)
+                    | Q(tags__id__in=tag_ids)
+                    | Q(author_id__in=subscribed_user_ids),
+                )
+                .distinct()
+                .order_by("-created_at")
+            )
+        else:
+            queryset = Post.objects.filter(is_visible=True).order_by(
+                "-created_at"
+            )[:10]
+
+        return queryset

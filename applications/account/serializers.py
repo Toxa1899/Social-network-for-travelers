@@ -6,6 +6,9 @@ from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from rest_framework.validators import ValidationError
 from .models import BlockedUser
+from applications.countries.models import Country
+from applications.product.models import Post
+from applications.product.serializers import PostSerializer
 
 User = get_user_model()
 
@@ -98,4 +101,60 @@ class ChangePasswordSerializers(serializers.Serializer):
 class BlockedUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = BlockedUser
-        fields = ["user", "can_create_posts"]
+        fields = ["id", "user", "can_create_posts", "is_blocked"]
+
+
+class UserListSerializer(serializers.ModelSerializer):
+    post_count = serializers.IntegerField(source="posts.count", read_only=True)
+    country_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "date_joined",
+            "post_count",
+            "country_count",
+        ]
+
+    def get_country_count(self, obj):
+        return Country.objects.filter(posts__author=obj).distinct().count()
+
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    post_count = serializers.IntegerField(source="posts.count", read_only=True)
+    country_count = serializers.SerializerMethodField()
+    posts_by_country = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "date_joined",
+            "post_count",
+            "country_count",
+            "posts_by_country",
+        ]
+
+    def get_country_count(self, obj):
+        return Country.objects.filter(posts__author=obj).distinct().count()
+
+    def get_posts_by_country(self, obj):
+        posts = Post.objects.filter(author=obj).order_by(
+            "country__name", "created_at"
+        )
+        country_posts = {}
+        for post in posts:
+            country_name = post.country.name
+            if country_name not in country_posts:
+                country_posts[country_name] = []
+            country_posts[country_name].append(PostSerializer(post).data)
+        return country_posts

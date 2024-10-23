@@ -14,6 +14,8 @@ from .serializers import (
     DeleteAccountSerializer,
     RegisterSerializers,
     BlockedUserSerializer,
+    UserListSerializer,
+    UserDetailSerializer,
 )
 
 
@@ -86,3 +88,15 @@ class BlockedUserViewSet(viewsets.ModelViewSet):
     queryset = BlockedUser.objects.all()
     serializer_class = BlockedUserSerializer
     permission_classes = [IsAdminUser]
+
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return UserListSerializer
+        if self.action == "retrieve":
+            return UserDetailSerializer
+        return super().get_serializer_class()
