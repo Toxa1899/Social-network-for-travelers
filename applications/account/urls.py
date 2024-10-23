@@ -28,7 +28,7 @@ urlpatterns = [
         ChangePasswordAPIView.as_view(),
         name="change_password",
     ),
-    path("refresh", TokenRefreshView.as_view()),
+    path("refresh", TokenRefreshView.as_view(), name="refresh"),
     path(
         "delete/",
         DeleteAccountAPIView.as_view(),

@@ -5,10 +5,14 @@ from .serializers import SubscriptionSerializer
 from django.db.models import Q
 from rest_framework.response import Response
 from permissions.permissions import IsNotBlocked, IsNotAdmin
+from config.mixins import GlobalContextMixin
 
 
 class SubscriptionViewSet(
-    mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet
+    GlobalContextMixin,
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    viewsets.GenericViewSet,
 ):
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer

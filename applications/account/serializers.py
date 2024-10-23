@@ -17,6 +17,10 @@ logger = logging.getLogger(__name__)
 
 
 class RegisterSerializers(serializers.ModelSerializer):
+    """
+    Сериализатор для регистрации модели User.
+    """
+
     password2 = serializers.CharField(
         min_length=8, required=True, write_only=True
     )
@@ -26,6 +30,9 @@ class RegisterSerializers(serializers.ModelSerializer):
         fields = ("email", "password", "password2")
 
     def validate(self, attrs):
+        """
+        Валидация паролей , точнее проверка на совпадение
+        """
         p1 = attrs.get("password")
         p2 = attrs.pop("password2")
 
@@ -40,22 +47,36 @@ class RegisterSerializers(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
+        """
+        create - создание пользователя
+        """
         user = User.objects.create_user(**validated_data)
         return user
 
 
 class DeleteAccountSerializer(serializers.Serializer):
+    """
+    Сериализатор для удаления аккаунта.
+    """
+
     password = serializers.CharField(
         min_length=6, required=True, write_only=True
     )
 
 
 class ChangePasswordSerializers(serializers.Serializer):
+    """
+    Сериализатор для смены пароля.
+    """
+
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True, min_length=8)
     new_password_confirm = serializers.CharField(required=True, min_length=8)
 
     def validate_old_password(self, password):
+        """
+        валидация текущего пароля
+        """
         user = self.context["request"].user
         if not user.check_password(password):
             logger.warning(
@@ -65,6 +86,9 @@ class ChangePasswordSerializers(serializers.Serializer):
         return password
 
     def validate(self, attrs):
+        """
+        валидация двух новых паролей
+        """
         new_password = attrs.get("new_password")
         new_password_confirm = attrs.get("new_password_confirm")
         user = self.context["request"].user
@@ -91,6 +115,10 @@ class ChangePasswordSerializers(serializers.Serializer):
         return attrs
 
     def set_new_password(self):
+        """
+        метод для обновления пароля данный метод вызывается ,
+        в представлении - views
+        """
         user = self.context["request"].user
         new_password = self.validated_data["new_password"]
         user.set_password(new_password)
@@ -99,12 +127,20 @@ class ChangePasswordSerializers(serializers.Serializer):
 
 
 class BlockedUserSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для  блокировке  (can_create_posts, is_blocked)
+    """
+
     class Meta:
         model = BlockedUser
         fields = ["id", "user", "can_create_posts", "is_blocked"]
 
 
 class UserListSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для  вывода пользователей
+    """
+
     post_count = serializers.IntegerField(source="posts.count", read_only=True)
     country_count = serializers.SerializerMethodField()
 
@@ -122,10 +158,17 @@ class UserListSerializer(serializers.ModelSerializer):
         ]
 
     def get_country_count(self, obj):
+        """
+        количество стран, к которым пользователь создал посты
+        """
         return Country.objects.filter(posts__author=obj).distinct().count()
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для  вывода пользователя >3
+    """
+
     post_count = serializers.IntegerField(source="posts.count", read_only=True)
     country_count = serializers.SerializerMethodField()
     posts_by_country = serializers.SerializerMethodField()
@@ -145,9 +188,15 @@ class UserDetailSerializer(serializers.ModelSerializer):
         ]
 
     def get_country_count(self, obj):
+        """
+        количество стран, к которым пользователь создал посты
+        """
         return Country.objects.filter(posts__author=obj).distinct().count()
 
     def get_posts_by_country(self, obj):
+        """
+        количество постов
+        """
         posts = Post.objects.filter(author=obj).order_by(
             "country__name", "created_at"
         )
@@ -158,3 +207,15 @@ class UserDetailSerializer(serializers.ModelSerializer):
                 country_posts[country_name] = []
             country_posts[country_name].append(PostSerializer(post).data)
         return country_posts
+
+
+class TopUserSerializer(serializers.ModelSerializer):
+    """
+    Топ пользователей
+    """
+
+    total_rating = serializers.IntegerField()
+
+    class Meta:
+        model = User
+        fields = ["id", "username", "total_rating"]

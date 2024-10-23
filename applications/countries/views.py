@@ -11,9 +11,12 @@ from rest_framework.decorators import action
 from applications.product.models import Post
 from applications.product.serializers import PostSerializer
 from rest_framework.response import Response
+from config.mixins import GlobalContextMixin
 
 
-class CountriesAllModelViewSet(viewsets.ReadOnlyModelViewSet):
+class CountriesAllModelViewSet(
+    GlobalContextMixin, viewsets.ReadOnlyModelViewSet
+):
     permission_classes = [
         IsNotBlocked,
         IsNotAdmin,
@@ -24,7 +27,7 @@ class CountriesAllModelViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CountriesSerializer
 
 
-class CountriesModelViewSet(viewsets.ReadOnlyModelViewSet):
+class CountriesModelViewSet(GlobalContextMixin, viewsets.ReadOnlyModelViewSet):
     permission_classes = [
         IsNotBlocked,
         IsNotAdmin,

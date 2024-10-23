@@ -16,6 +16,18 @@ class PostImageSerializer(serializers.ModelSerializer):
         fields = ["image"]
 
 
+class LatestPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ["id", "topic", "created_at"]
+
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ["id", "name"]
+
+
 class PostDetailSerializer(serializers.ModelSerializer):
     comment = CommentSerializer(source="comments", many=True)
     images = PostImageSerializer(

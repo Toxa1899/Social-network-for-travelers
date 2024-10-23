@@ -20,9 +20,10 @@ from .serializers import (
 )
 from .decorators import rating_schema, comment_schema
 from applications.subscriptions.models import Subscription
+from config.mixins import GlobalContextMixin
 
 
-class PostModelViewSet(viewsets.ModelViewSet):
+class PostModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
     permission_classes = [
         IsAuthenticatedOrReadOnly,
         IsAuthorOrReadOnly,
@@ -77,7 +78,7 @@ class PostModelViewSet(viewsets.ModelViewSet):
         )
 
 
-class CommentModelViewSet(viewsets.ModelViewSet):
+class CommentModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
     permission_classes = [
         IsAuthenticated,
         IsAuthorOrReadOnly,
@@ -91,13 +92,12 @@ class CommentModelViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
 
-class MainViewSet(viewsets.ReadOnlyModelViewSet):
+class MainViewSet(GlobalContextMixin, viewsets.ReadOnlyModelViewSet):
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsNotBlocked, IsNotAdmin]
 
     def get_queryset(self):
         user = self.request.user
-
         if user.is_authenticated:
             subscriptions = Subscription.objects.filter(user=user)
             country_ids = subscriptions.values_list("country_id", flat=True)
