@@ -4,6 +4,7 @@ from .models import Subscription
 from .serializers import SubscriptionSerializer
 from django.db.models import Q
 from rest_framework.response import Response
+from permissions.permissions import IsNotBlocked, IsNotAdmin
 
 
 class SubscriptionViewSet(
@@ -11,7 +12,7 @@ class SubscriptionViewSet(
 ):
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsNotBlocked, IsNotAdmin]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

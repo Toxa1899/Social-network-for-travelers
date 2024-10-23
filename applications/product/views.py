@@ -1,18 +1,31 @@
 from rest_framework import viewsets, status
-from .models import Post, Rating
-from .serializers import PostSerializer
 from rest_framework.permissions import (
-    IsAuthenticatedOrReadOnly,
     IsAuthenticated,
+    IsAuthenticatedOrReadOnly,
 )
-from rest_framework.decorators import authentication_classes, action
+from rest_framework.decorators import action
 from rest_framework.response import Response
-from .decorators import rating_schema
+from django.db.models import Q
+from .models import Post, Rating, Comment
+from permissions.permissions import (
+    IsAuthorOrReadOnly,
+    BlockCreatePosts,
+    IsNotBlocked,
+    IsNotAdmin,
+)
+from .serializers import PostSerializer, CommentSerializer
+from .decorators import rating_schema, comment_schema
 
 
 class PostModelViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    queryset = Post.objects.all().order_by("-created_at")
+    permission_classes = [
+        IsAuthenticatedOrReadOnly,
+        IsAuthorOrReadOnly,
+        BlockCreatePosts,
+        IsNotBlocked,
+        IsNotAdmin,
+    ]
+    queryset = Post.objects.filter(is_visible=True).order_by("-created_at")
     serializer_class = PostSerializer
 
     def perform_create(self, serializer):
@@ -31,15 +44,16 @@ class PostModelViewSet(viewsets.ModelViewSet):
                 },
                 status=status.HTTP_400_BAD_REQUEST,
             )
+        return self._change_rating(request, rating_change)
 
+    def _change_rating(self, request, rating_change):
+        post = self.get_object()
         rating, created = Rating.objects.get_or_create(
-            user=self.request.user, post=self.get_object()
+            user=request.user, post=post
         )
+
         if created:
-            if rating_change == "increase":
-                rating.rating += 1
-            elif rating_change == "decrease":
-                rating.rating -= 1
+            rating.rating = 1 if rating_change == "increase" else -1
         else:
             return Response(
                 {"rating": rating.rating}, status=status.HTTP_200_OK
@@ -50,3 +64,17 @@ class PostModelViewSet(viewsets.ModelViewSet):
             {"message": "success", "new_rating": rating.rating},
             status=status.HTTP_200_OK,
         )
+
+
+class CommentModelViewSet(viewsets.ModelViewSet):
+    permission_classes = [
+        IsAuthenticated,
+        IsAuthorOrReadOnly,
+        IsNotBlocked,
+        IsNotAdmin,
+    ]
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)

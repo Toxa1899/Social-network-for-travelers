@@ -5,6 +5,7 @@ from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from rest_framework.validators import ValidationError
+from .models import BlockedUser
 
 User = get_user_model()
 
@@ -92,3 +93,9 @@ class ChangePasswordSerializers(serializers.Serializer):
         user.set_password(new_password)
         user.save(update_fields=["password"])
         logger.info(f"Пароль для пользователя '{user.email}' был изменён")
+
+
+class BlockedUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BlockedUser
+        fields = ["user", "can_create_posts"]

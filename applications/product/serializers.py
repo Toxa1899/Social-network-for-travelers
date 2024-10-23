@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post, PostImage, Tag
+from .models import Post, PostImage, Tag, Comment
 from applications.countries.models import Country
 from core.config import settings
 
@@ -75,3 +75,10 @@ class PostSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation["tags"] = [tag.name for tag in instance.tags.all()]
         return representation
+
+
+class CommentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Comment
+        fields = ["id", "content", "post"]

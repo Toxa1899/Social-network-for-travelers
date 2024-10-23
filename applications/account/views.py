@@ -5,12 +5,15 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from rest_framework import viewsets
+from .models import BlockedUser
+from rest_framework.permissions import IsAdminUser
 
 from .serializers import (
     ChangePasswordSerializers,
     DeleteAccountSerializer,
     RegisterSerializers,
+    BlockedUserSerializer,
 )
 
 
@@ -38,7 +41,6 @@ class DeleteAccountAPIView(APIView):
     def delete(self, request):
         user = request.user
         serializer = DeleteAccountSerializer(data=request.data)
-
         if serializer.is_valid():
             deletion_password = serializer.validated_data.get("password")
 
@@ -78,3 +80,9 @@ class ChangePasswordAPIView(APIView):
             f"Пароль пользователя '{request.user.email}' был успешно изменён"
         )
         return Response("Вы успешно сменили пароль", status=200)
+
+
+class BlockedUserViewSet(viewsets.ModelViewSet):
+    queryset = BlockedUser.objects.all()
+    serializer_class = BlockedUserSerializer
+    permission_classes = [IsAdminUser]
