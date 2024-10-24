@@ -3,7 +3,6 @@ from .models import (
     Tag,
     Post,
     PostImage,
-    Comment,
     Rating,
     LiftLog,
     PostLiftSettings,
@@ -19,6 +18,7 @@ class PostImageInline(admin.TabularInline):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = [
+        "id",
         "author",
         "country",
         "topic",
@@ -41,13 +41,6 @@ class TagAdmin(admin.ModelAdmin):
         "name",
         "id",
     )
-
-
-@admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ("post", "author", "created_at", "content")
-    search_fields = ("post__topic", "author__email", "content")
-    list_filter = ("created_at",)
 
 
 @admin.register(Rating)

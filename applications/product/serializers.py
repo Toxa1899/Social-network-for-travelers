@@ -1,13 +1,10 @@
 from rest_framework import serializers
-from .models import Post, PostImage, Tag, Comment
+from .models import Post, PostImage, Tag
+from applications.comment.models import Comment
+from applications.comment.serializers import CommentSerializer
 from applications.countries.models import Country
 from core.config import settings
-
-
-class CommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = ["id", "content", "post"]
+from applications.account.models import CustomUser
 
 
 class PostImageSerializer(serializers.ModelSerializer):
@@ -61,7 +58,9 @@ class PostDetailSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-
+    author = serializers.PrimaryKeyRelatedField(
+        queryset=CustomUser.objects.all(), required=False
+    )
     images = PostImageSerializer(
         source="post_images", many=True, read_only=True
     )
@@ -76,6 +75,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = [
+            "author",
             "id",
             "country",
             "topic",

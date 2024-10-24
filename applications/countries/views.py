@@ -16,7 +16,7 @@ from config.mixins import GlobalContextMixin
 
 class CountriesAllModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
     """
-    Все страны , Get для всех , Остально только для  админов
+    Все страны , Get для всех , остальное только для  админов
     """
 
     permission_classes = [

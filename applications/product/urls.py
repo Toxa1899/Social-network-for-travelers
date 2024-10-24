@@ -2,16 +2,15 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import (
     PostModelViewSet,
-    CommentModelViewSet,
     MainViewSet,
     DisablePost,
 )
 
 router = DefaultRouter()
 router.register("feed", MainViewSet, basename="feed")
-router.register("comment", CommentModelViewSet)
 
-router.register("", PostModelViewSet)
+
+router.register("", PostModelViewSet, basename="posts")
 
 
 urlpatterns = [

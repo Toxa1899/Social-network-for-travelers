@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "applications.product",
     "applications.subscriptions",
     "applications.countries",
+    "applications.comment",
 ]
 
 MIDDLEWARE = [

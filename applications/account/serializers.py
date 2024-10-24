@@ -148,7 +148,6 @@ class UserListSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             "id",
-            "username",
             "email",
             "first_name",
             "last_name",
@@ -177,7 +176,6 @@ class UserDetailSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             "id",
-            "username",
             "email",
             "first_name",
             "last_name",
@@ -211,11 +209,21 @@ class UserDetailSerializer(serializers.ModelSerializer):
 
 class TopUserSerializer(serializers.ModelSerializer):
     """
-    Топ пользователей
+    Сериализатор для Топ пользователей
     """
 
     total_rating = serializers.IntegerField()
 
     class Meta:
         model = User
-        fields = ["id", "username", "total_rating"]
+        fields = ["id", "email", "total_rating"]
+
+
+class UserSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для Пользователей
+    """
+
+    class Meta:
+        model = User
+        fields = ["id", "email"]

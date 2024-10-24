@@ -163,6 +163,8 @@ class BlockedUserViewSet(viewsets.ModelViewSet):
     1) создание постов
     2) доступ к приложению
     данно представление доступно только IsAdminUser
+    принимает два boolean поля -> (can_create_posts, is_blocked)
+    если ничего не передать по дефолту (отработат can_create_posts = False)
     """
 
     queryset = BlockedUser.objects.all()
@@ -172,7 +174,7 @@ class BlockedUserViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
         logger.info(
-            f"Админ {request.user} заблокировал пользователя {response.data['id']}"
+            f"Админ {request.user} заблокировал  пользователя {response.data['id']}"
         )
         return response
 

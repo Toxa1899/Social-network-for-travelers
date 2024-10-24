@@ -11,7 +11,7 @@ class SubscriptionSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         if not attrs:
             raise serializers.ValidationError(
-                "Необходимо указать одно из значений"
+                "Необходимо указать одно из значений (country, tag, subscribed_user)"
             )
 
         if len(attrs.keys()) > 1:

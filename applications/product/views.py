@@ -7,7 +7,7 @@ from rest_framework.permissions import (
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.db.models import Q
-from .models import Post, Rating, Comment
+from .models import Post, Rating
 from permissions.permissions import (
     IsAuthorOrReadOnly,
     BlockCreatePosts,
@@ -16,10 +16,9 @@ from permissions.permissions import (
 )
 from .serializers import (
     PostSerializer,
-    CommentSerializer,
     PostDetailSerializer,
 )
-from .decorators import rating_schema, comment_schema
+from .decorators import rating_schema
 from applications.subscriptions.models import Subscription
 from config.mixins import GlobalContextMixin
 from rest_framework.views import APIView
@@ -27,6 +26,11 @@ from django.shortcuts import get_object_or_404
 
 
 class PostModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
+    """
+    Представление постов , данное представление отображает посты пользователя ,
+    некий свой аккаунт не является лентой
+    """
+
     permission_classes = [
         IsAuthenticatedOrReadOnly,
         IsAuthorOrReadOnly,
@@ -35,7 +39,7 @@ class PostModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
         IsNotBlocked,
         IsNotAdmin,
     ]
-    queryset = Post.objects.filter(is_visible=True).order_by("-created_at")
+    queryset = Post.objects.all().order_by("-created_at")
     serializer_class = PostSerializer
 
     def get_serializer_class(self):
@@ -80,22 +84,17 @@ class PostModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
             status=status.HTTP_200_OK,
         )
 
-
-class CommentModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
-    permission_classes = [
-        IsAuthenticated,
-        IsAuthorOrReadOnly,
-        IsNotBlocked,
-        IsNotAdmin,
-    ]
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+    def get_queryset(self):
+        author = self.request.user
+        return self.queryset.filter(author=author)
 
 
 class MainViewSet(GlobalContextMixin, viewsets.ReadOnlyModelViewSet):
+    """
+    Представление постов , данное представление является лентой
+
+    """
+
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsNotBlocked, IsNotAdmin]
 
@@ -125,6 +124,11 @@ class MainViewSet(GlobalContextMixin, viewsets.ReadOnlyModelViewSet):
             )[:10]
 
         return queryset
+
+    def get_serializer_class(self):
+        if self.action == "retrieve":
+            return PostDetailSerializer
+        return PostSerializer
 
 
 class DisablePost(APIView):

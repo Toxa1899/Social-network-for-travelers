@@ -127,7 +127,7 @@ class Countries(APITestCase):
 
     def test_get_countries(self):
         """
-        проверка на получение стран
+        проверка на получение стран  null
         """
         request = self.factory.get(self.url, format="json")
         force_authenticate(request, self.user)
@@ -137,7 +137,7 @@ class Countries(APITestCase):
 
     def test_get_countries_data(self):
         """
-        проверка на получение стран
+        проверка на получение стран not null
         """
         country = Country.objects.create(name="kyrgyzstan")
         Post.objects.create(
