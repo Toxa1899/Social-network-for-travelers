@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post, PostImage, Tag, PostLiftSettings
+from .models import Post, PostImage, Tag, PostLiftSettings, LiftLog
 from applications.comment.models import Comment
 from applications.comment.serializers import CommentSerializer
 from applications.countries.models import Country
@@ -8,24 +8,40 @@ from applications.account.models import CustomUser
 
 
 class PostImageSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор  img для постов
+    """
+
     class Meta:
         model = PostImage
         fields = ["image"]
 
 
 class LatestPostSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор последних постов
+    """
+
     class Meta:
         model = Post
         fields = ["id", "topic", "created_at"]
 
 
 class TagSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для тегов
+    """
+
     class Meta:
         model = Tag
         fields = ["id", "name"]
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для детального отображения постов
+    """
+
     comment = CommentSerializer(source="comments", many=True)
     images = PostImageSerializer(
         source="post_images", many=True, read_only=True
@@ -52,12 +68,19 @@ class PostDetailSerializer(serializers.ModelSerializer):
         ]
 
     def to_representation(self, instance):
+        """
+        для добавления поля (tags)
+        """
         representation = super().to_representation(instance)
         representation["tags"] = [tag.name for tag in instance.tags.all()]
         return representation
 
 
 class PostSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для  отображения постов
+    """
+
     author = serializers.PrimaryKeyRelatedField(
         queryset=CustomUser.objects.all(), required=False
     )
@@ -86,6 +109,9 @@ class PostSerializer(serializers.ModelSerializer):
         ]
 
     def validate_image_files(self, image_files):
+        """
+        валидация image
+        """
         if image_files:
             if len(image_files) > 10:
                 raise serializers.ValidationError(
@@ -100,6 +126,9 @@ class PostSerializer(serializers.ModelSerializer):
         return image_files
 
     def create(self, validated_data):
+        """
+        Создание поста
+        """
         tags_data = validated_data.pop("tags", None)
         image_files = validated_data.pop("image_files", None)
 
@@ -111,11 +140,17 @@ class PostSerializer(serializers.ModelSerializer):
         return post
 
     def _create_images(self, post, image_files):
+        """
+        создание img
+        """
         if image_files:
             for image in image_files:
                 PostImage.objects.create(post=post, image=image)
 
     def _create_tags(self, post, tags_data):
+        """
+        создание тега
+        """
         if tags_data:
             tag_names = tags_data.split()
             for tag_name in tag_names:
@@ -123,12 +158,29 @@ class PostSerializer(serializers.ModelSerializer):
                 post.tags.add(tag)
 
     def to_representation(self, instance):
+        """
+        для добавления поля (tags)
+        """
         representation = super().to_representation(instance)
         representation["tags"] = [tag.name for tag in instance.tags.all()]
         return representation
 
 
 class PostLiftSettingSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для поднятия поста
+    """
+
     class Meta:
         model = PostLiftSettings
+        fields = "__all__"
+
+
+class LiftLogSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для лога подгятия поста
+    """
+
+    class Meta:
+        model = LiftLog
         fields = "__all__"

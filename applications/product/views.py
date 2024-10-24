@@ -7,7 +7,7 @@ from rest_framework.permissions import (
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.db.models import Q
-from .models import Post, Rating, PostLiftSettings
+from .models import Post, Rating, PostLiftSettings, LiftLog
 from permissions.permissions import (
     IsAuthorOrReadOnly,
     BlockCreatePosts,
@@ -18,6 +18,7 @@ from .serializers import (
     PostSerializer,
     PostDetailSerializer,
     PostLiftSettingSerializer,
+    LiftLogSerializer,
 )
 from .decorators import rating_schema
 from applications.subscriptions.models import Subscription
@@ -154,6 +155,20 @@ class DisablePost(APIView):
 
 
 class PostLiftSettingsModelViewSet(viewsets.ModelViewSet):
+    """
+    Представление для  поднятия постов, доступ имееют только админы
+    """
+
     permission_classes = [IsAdminUser]
     queryset = PostLiftSettings.objects.all()
     serializer_class = PostLiftSettingSerializer
+
+
+class LiftLogModelViewSet(viewsets.ModelViewSet):
+    """
+    Представление для лога поднятия постов, доступ имееют только админы
+    """
+
+    permission_classes = [IsAdminUser]
+    queryset = LiftLog.objects.all()
+    serializer_class = LiftLogSerializer

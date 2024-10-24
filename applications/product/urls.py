@@ -5,11 +5,13 @@ from .views import (
     MainViewSet,
     DisablePost,
     PostLiftSettingsModelViewSet,
+    LiftLogModelViewSet,
 )
 
 router = DefaultRouter()
 router.register("feed", MainViewSet, basename="feed")
-router.register("lift", PostLiftSettingsModelViewSet, basename="feed")
+router.register("lift", PostLiftSettingsModelViewSet, basename="lift")
+router.register("lift-log", LiftLogModelViewSet, basename="lift-log")
 
 router.register("", PostModelViewSet, basename="posts")
 
