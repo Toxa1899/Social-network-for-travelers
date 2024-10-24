@@ -126,7 +126,6 @@ class DaysOfWeek(models.Model):
 
 
 class PostLiftSettings(models.Model):
-
     post = models.OneToOneField(
         Post,
         on_delete=models.CASCADE,

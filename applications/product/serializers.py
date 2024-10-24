@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post, PostImage, Tag
+from .models import Post, PostImage, Tag, PostLiftSettings
 from applications.comment.models import Comment
 from applications.comment.serializers import CommentSerializer
 from applications.countries.models import Country
@@ -126,3 +126,9 @@ class PostSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation["tags"] = [tag.name for tag in instance.tags.all()]
         return representation
+
+
+class PostLiftSettingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PostLiftSettings
+        fields = "__all__"

@@ -221,6 +221,6 @@ CELERY_BEAT_SCHEDULE = {
     },
     "lift-posts-every-minute": {
         "task": "applications.product.tasks.lift_posts",
-        "schedule": crontab(minute="*/1"),
+        "schedule": 60,
     },
 }

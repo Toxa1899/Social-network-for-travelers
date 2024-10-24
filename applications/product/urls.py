@@ -4,11 +4,12 @@ from .views import (
     PostModelViewSet,
     MainViewSet,
     DisablePost,
+    PostLiftSettingsModelViewSet,
 )
 
 router = DefaultRouter()
 router.register("feed", MainViewSet, basename="feed")
-
+router.register("lift", PostLiftSettingsModelViewSet, basename="feed")
 
 router.register("", PostModelViewSet, basename="posts")
 
