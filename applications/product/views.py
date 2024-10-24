@@ -39,7 +39,7 @@ class PostModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
         IsNotBlocked,
         IsNotAdmin,
     ]
-    queryset = Post.objects.all().order_by("-created_at")
+    queryset = Post.objects.all().order_by("-updated_at")
     serializer_class = PostSerializer
 
     def get_serializer_class(self):
@@ -116,11 +116,11 @@ class MainViewSet(GlobalContextMixin, viewsets.ReadOnlyModelViewSet):
                     | Q(author_id__in=subscribed_user_ids),
                 )
                 .distinct()
-                .order_by("-created_at")
+                .order_by("-updated_at")
             )
         else:
             queryset = Post.objects.filter(is_visible=True).order_by(
-                "-created_at"
+                "-updated_at"
             )[:10]
 
         return queryset

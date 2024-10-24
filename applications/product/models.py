@@ -88,7 +88,7 @@ class Rating(models.Model):
         verbose_name="Пост",
     )
 
-    rating = models.IntegerField(
+    rating = models.SmallIntegerField(
         default=0,
         blank=True,
         null=True,
@@ -113,10 +113,17 @@ class LiftLog(models.Model):
     def __str__(self):
         return f"Поднятие поста {self.post} в {self.timestamp}"
 
+    class Meta:
+        verbose_name = "Лог поднятия поста"
+        verbose_name_plural = "Лог поднятия поста"
+
 
 class PostLiftSettings(models.Model):
     post = models.OneToOneField(
-        Post, on_delete=models.CASCADE, related_name="lift_settings"
+        Post,
+        on_delete=models.CASCADE,
+        related_name="lift_settings",
+        verbose_name="Пост",
     )
     start_date = models.DateField()
     end_date = models.DateField()
@@ -125,3 +132,7 @@ class PostLiftSettings(models.Model):
 
     def __str__(self):
         return f"Настройка поднятия для {self.post}"
+
+    class Meta:
+        verbose_name = "поднятие поста"
+        verbose_name_plural = "поднятие поста"

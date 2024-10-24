@@ -1,13 +1,14 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.db.models import Count, Sum
-from applications.product.models import Post, Tag
+from applications.product.models import Post, Tag, Rating
 from applications.product.serializers import (
     LatestPostSerializer,
     TagSerializer,
 )
 from applications.account.serializers import TopUserSerializer
 from rest_framework.authentication import get_user_model
+from django.db.models import Subquery, OuterRef
 
 User = get_user_model()
 
@@ -20,9 +21,12 @@ class GlobalContextMixin:
         tags = Tag.objects.annotate(post_count=Count("posts")).order_by(
             "-post_count"
         )[:10]
-        top_users = User.objects.annotate(
-            total_rating=Sum("ratings__rating")
-        ).order_by("-total_rating")[:5]
+
+        top_users = (
+            User.objects.annotate(total_rating=Sum("posts__ratings__rating"))
+            .order_by("-total_rating")
+            .filter(total_rating__gt=0)[:5]
+        )
 
         latest_posts_serializer = LatestPostSerializer(latest_posts, many=True)
         tags_serializer = TagSerializer(tags, many=True)
