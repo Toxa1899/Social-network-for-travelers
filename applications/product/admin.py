@@ -6,6 +6,7 @@ from .models import (
     Rating,
     LiftLog,
     PostLiftSettings,
+    DaysOfWeek,
 )
 
 
@@ -59,8 +60,9 @@ class LiftLogAdmin(admin.ModelAdmin):
 
 @admin.register(PostLiftSettings)
 class PostLiftSettingsAdmin(admin.ModelAdmin):
-    list_display = ("post", "start_date", "end_date", "time", "days_of_week")
+    list_display = ("post", "start_date", "end_date", "time")
     search_fields = ("post__topic",)
 
 
 admin.site.register(PostImage)
+admin.site.register(DaysOfWeek)

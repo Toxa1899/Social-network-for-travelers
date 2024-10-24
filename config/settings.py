@@ -219,4 +219,8 @@ CELERY_BEAT_SCHEDULE = {
         "task": "applications.countries.tasks.country_task",
         "schedule": crontab(minute="*/720"),
     },
+    "lift-posts-every-minute": {
+        "task": "applications.product.tasks.lift_posts",
+        "schedule": crontab(minute="*/1"),
+    },
 }

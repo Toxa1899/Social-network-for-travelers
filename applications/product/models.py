@@ -118,17 +118,28 @@ class LiftLog(models.Model):
         verbose_name_plural = "Лог поднятия поста"
 
 
+class DaysOfWeek(models.Model):
+    days_of_week = models.CharField(max_length=50, verbose_name="дни недели")
+
+    def __str__(self):
+        return self.days_of_week
+
+
 class PostLiftSettings(models.Model):
+
     post = models.OneToOneField(
         Post,
         on_delete=models.CASCADE,
         related_name="lift_settings",
         verbose_name="Пост",
     )
-    start_date = models.DateField()
-    end_date = models.DateField()
-    time = models.TimeField()
-    days_of_week = models.CharField(max_length=50)
+    start_date = models.DateField(verbose_name="Дата начала")
+    end_date = models.DateField(verbose_name="Дата конца")
+    time = models.TimeField(verbose_name="Время")
+
+    days_of_week = models.ManyToManyField(
+        DaysOfWeek, verbose_name="дни недели "
+    )
 
     def __str__(self):
         return f"Настройка поднятия для {self.post}"
