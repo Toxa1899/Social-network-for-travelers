@@ -17,6 +17,10 @@ from config.mixins import GlobalContextMixin
 
 
 class CommentModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
+    """
+    Представление Комментариев
+    """
+
     permission_classes = [
         IsAuthenticated,
         IsAuthorOrReadOnly,
@@ -27,4 +31,14 @@ class CommentModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
     serializer_class = CommentSerializer
 
     def perform_create(self, serializer):
+        """
+        передаем пользователя
+        """
         serializer.save(author=self.request.user)
+
+    def get_queryset(self):
+        """
+        фильтруем и получаем толкьо свои коменты
+        """
+        author = self.request.user
+        return self.queryset.filter(author=author)

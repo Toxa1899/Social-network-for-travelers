@@ -48,6 +48,9 @@ class CountriesModelViewSet(GlobalContextMixin, viewsets.ReadOnlyModelViewSet):
     )
 
     def retrieve(self, request, *args, **kwargs):
+        """
+        метод для фильтрации и вывода  стран
+        """
         country = self.get_object()
         serializer = self.get_serializer(country)
         posts = Post.objects.filter(country=country, is_visible=True).order_by(

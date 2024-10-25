@@ -30,6 +30,9 @@ class CommentCRUDTest(APITestCase):
         )
 
     def test_create_comment(self):
+        """
+        тест создание комента
+        """
         data = {
             "author": self.user.id,
             "post": self.post.id,
@@ -38,3 +41,29 @@ class CommentCRUDTest(APITestCase):
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 201)
         self.assertEqual(Post.objects.count(), 1)
+
+    def test_retrive_comment_no_author(self):
+        """
+        тест получение не своих коментов
+        """
+        user_no_author = CustomUser.objects.create(
+            email="noauthor@gmail.com", password="passwordpassword"
+        )
+
+        Comment.objects.create(
+            author=user_no_author, post=self.post, content="test"
+        )
+
+        response = self.client.get(self.url, format="json")
+        self.assertEqual(response.json()["count"], 0)
+
+    def test_retrive_comment_author(self):
+        """
+        тест получение  своих коментов
+        """
+        Comment.objects.create(
+            author=self.user, post=self.post, content="test"
+        )
+
+        response = self.client.get(self.url, format="json")
+        self.assertEqual(response.json()["count"], 1)
