@@ -1,3 +1,40 @@
 from django.test import TestCase
+from rest_framework.test import APITestCase, APIClient
+from django.urls import reverse
+from applications.account.models import CustomUser
+from applications.comment.models import Comment
+from applications.product.models import Post
+from applications.countries.models import Country
 
-# Create your tests here.
+
+class CommentCRUDTest(APITestCase):
+    """
+    Тест CRUD коментов
+    """
+
+    def setUp(self):
+        self.email = "test@gmail.com"
+        self.password = "passwordpassword"
+        self.user = CustomUser.objects.create_user(
+            email=self.email, password=self.password
+        )
+        self.client = APIClient()
+        self.client.force_authenticate(self.user)
+        self.url = reverse("comment-list")
+        self.country = Country.objects.create(name="Kyrgyzstan")
+        self.post = Post.objects.create(
+            author=self.user,
+            country=self.country,
+            topic="Old Topic",
+            body="Old Body",
+        )
+
+    def test_create_comment(self):
+        data = {
+            "author": self.user.id,
+            "post": self.post.id,
+            "content": "test-comment",
+        }
+        response = self.client.post(self.url, data, format="json")
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(Post.objects.count(), 1)

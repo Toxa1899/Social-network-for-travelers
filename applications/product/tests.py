@@ -1,7 +1,5 @@
 from rest_framework.test import (
     APITestCase,
-    APIRequestFactory,
-    force_authenticate,
     APIClient,
 )
 from applications.account.models import CustomUser
@@ -9,11 +7,11 @@ from django.urls import reverse
 from applications.countries.models import Country
 from applications.product.models import (
     Post,
-    LiftLog,
+    Rating,
     DaysOfWeek,
     PostLiftSettings,
 )
-from applications.product.views import PostModelViewSet
+
 from django.utils import timezone
 
 
@@ -101,6 +99,7 @@ class PostCRUDTest(APITestCase):
         data = {"rating_change": "increase"}
         response = self.client.post(f"/api/v1/posts/{post.id}/rating/", data)
         self.assertEqual(response.status_code, 200)
+        self.assertTrue(Rating.objects.all().exists())
 
 
 class DisablePostTest(APITestCase):
@@ -136,6 +135,10 @@ class DisablePostTest(APITestCase):
 
 
 class PostLiftTest(APITestCase):
+    """
+    Тест поднятия поста
+    """
+
     def setUp(self):
         super().setUp()
         self.client = APIClient()
@@ -157,6 +160,9 @@ class PostLiftTest(APITestCase):
         self.now = timezone.now()
 
     def test_lift(self):
+        """
+        Тест создания lift post
+        """
         url = reverse("lift-list")
         day_of_week = DaysOfWeek.objects.create(days_of_week="Monday")
 
