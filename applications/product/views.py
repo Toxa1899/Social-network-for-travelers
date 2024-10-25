@@ -25,6 +25,10 @@ from applications.subscriptions.models import Subscription
 from config.mixins import GlobalContextMixin
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 class PostModelViewSet(GlobalContextMixin, viewsets.ModelViewSet):
@@ -149,6 +153,9 @@ class DisablePost(APIView):
         status = None
         visible = not post.is_visible
         status = "on" if visible else "off"
+        logger.info(
+            f"Админ {request.user.email} поставил пост {post.id} , в статус {status}"
+        )
         post.is_visible = visible
         post.save()
         return Response(f"{status}")
@@ -164,7 +171,7 @@ class PostLiftSettingsModelViewSet(viewsets.ModelViewSet):
     serializer_class = PostLiftSettingSerializer
 
 
-class LiftLogModelViewSet(viewsets.ModelViewSet):
+class LiftLogModelViewSet(viewsets.ReadOnlyModelViewSet):
     """
     Представление для лога поднятия постов, доступ имееют только админы
     """

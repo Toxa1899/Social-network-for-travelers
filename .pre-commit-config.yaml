@@ -8,7 +8,8 @@ repos:
     #   types: [python]
     #   pass_filenames: false
 
-    
+
+
     - id : black 
       name : black
       entry: black --config ./.black .
@@ -24,3 +25,7 @@ repos:
       types: [python]
       pass_filenames: false
        
+    - id: coverage
+      name: Coverage Check
+      entry: bash -c "coverage run --source='applications' manage.py test applications/ --keepdb  && coverage report"
+      language: system

@@ -1,0 +1,20 @@
+[run]
+source = "applications"  # <--- папка с приложениями
+# игнор файлов
+omit = 
+    */migrations/*
+    */tests/*
+    */__init__.py
+
+
+# пропускать файлы all покрытые тестами
+[report]
+show_missing = True
+skip_covered = True  
+
+# дериктория для html отчета
+[html]
+directory = "/coverage_html_report"  
+
+
+# coverage run --source='applications' manage.py test applications/ --keepdb 
