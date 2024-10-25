@@ -23,6 +23,7 @@ urlpatterns = [
     path("api/v1/subscriptions/", include("applications.subscriptions.urls")),
     path("api/v1/comment/", include("applications.comment.urls")),
     path("swagger/", schema_view.with_ui("swagger")),
+    path("redoc/", schema_view.with_ui("redoc")),
 ]
 
 
