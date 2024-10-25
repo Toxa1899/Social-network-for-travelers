@@ -7,11 +7,21 @@ from rest_framework.test import (
 from applications.account.models import CustomUser
 from django.urls import reverse
 from applications.countries.models import Country
-from applications.product.models import Post
+from applications.product.models import (
+    Post,
+    LiftLog,
+    DaysOfWeek,
+    PostLiftSettings,
+)
 from applications.product.views import PostModelViewSet
+from django.utils import timezone
 
 
 class PostCRUDTest(APITestCase):
+    """
+    Тест crad поста
+    """
+
     def setUp(self):
         self.client = APIClient()
         self.email = "admin@gmail.com"
@@ -78,6 +88,9 @@ class PostCRUDTest(APITestCase):
         self.assertEqual(Post.objects.count(), 0)
 
     def test_change_rating(self):
+        """
+        тест на добавление рейтинга
+        """
         post = Post.objects.create(
             author=self.user,
             country=self.country,
@@ -88,3 +101,72 @@ class PostCRUDTest(APITestCase):
         data = {"rating_change": "increase"}
         response = self.client.post(f"/api/v1/posts/{post.id}/rating/", data)
         self.assertEqual(response.status_code, 200)
+
+
+class DisablePostTest(APITestCase):
+    """
+    Тест отключения видимости поста
+    """
+
+    def setUp(self):
+        self.client = APIClient()
+        self.email = "admin@gmail.com"
+        self.password = "testpassword"
+        self.user = CustomUser.objects.create_superuser(
+            email=self.email, password=self.password
+        )
+
+        self.client.force_authenticate(user=self.user)
+        self.url = lambda pk: reverse("disable", kwargs={"pk": pk})
+        self.country = Country.objects.create(name="Kyrgyzstan")
+        self.post = Post.objects.create(
+            author=self.user,
+            country=self.country,
+            topic="Test",
+            body="Test Body",
+        )
+
+    def test_disable_post(self):
+        """
+        отключение поста
+        """
+        response = self.client.post(self.url(self.post.id))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Post.objects.filter(is_visible=False).exists(), True)
+
+
+class PostLiftTest(APITestCase):
+    def setUp(self):
+        super().setUp()
+        self.client = APIClient()
+        self.email = "admin@gmail.com"
+        self.password = "testpassword"
+        self.user = CustomUser.objects.create_superuser(
+            email=self.email, password=self.password
+        )
+
+        self.client.force_authenticate(user=self.user)
+
+        self.country = Country.objects.create(name="Kyrgyzstan")
+        self.post = Post.objects.create(
+            author=self.user,
+            country=self.country,
+            topic="Test",
+            body="Test Body",
+        )
+        self.now = timezone.now()
+
+    def test_lift(self):
+        url = reverse("lift-list")
+        day_of_week = DaysOfWeek.objects.create(days_of_week="Monday")
+
+        data = {
+            "post": self.post.id,
+            "start_date": self.now.date(),
+            "end_date": self.now.date(),
+            "time": self.now.time(),
+            "days_of_week": [day_of_week.id],
+        }
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(PostLiftSettings.objects.count(), 1)

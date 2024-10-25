@@ -18,5 +18,5 @@ router.register("", PostModelViewSet, basename="posts")
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("disable/<int:pk>/", DisablePost.as_view()),
+    path("disable/<int:pk>/", DisablePost.as_view(), name="disable"),
 ]
