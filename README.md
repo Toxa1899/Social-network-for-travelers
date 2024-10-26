@@ -69,6 +69,7 @@ sudo docker run hello-world
 ```
 
 
+
 <div>
   <h1>
     STEP 2
@@ -115,6 +116,8 @@ nano .env
 
 Измените параметр DEBUG на True:
 
+![image (1)](https://github.com/user-attachments/assets/3dd46a9c-e6b2-48ab-b1a3-091bae784616)
+
 
 Запустите проект:
 ```javascript
@@ -144,6 +147,9 @@ nano .env
 ```
 Добавьте IP-адрес вашего хостинга в ALLOWED_HOSTS:
 
+![image](https://github.com/user-attachments/assets/28c3ef5e-cb3a-438d-aea2-7f30dbf2562c)
+
+
 
 Запустите проект на хостинге:
 
@@ -158,12 +164,19 @@ docker compose -f docker-compose.prod.yml up  --build
 </div>
 
 
-при успешном развертывании проект  , данные url будут доступны
+при успешном  локальном развертывании проекта  , данные url будут доступны
+при развертывании на хотсинги замените 127.0.0.1:8000 на ip_адресс_вашего_хостинга
 
 
 <a href="http://127.0.0.1:8000/redoc/">http://127.0.0.1:8000/redoc/</a>
 
+
+![Screenshot from 2024-10-26 16-53-57](https://github.com/user-attachments/assets/e40452b1-4d93-4ab1-8ddd-7f52f0be34ae)
+
+
 <a href="http://127.0.0.1:8000/swagger/">http://127.0.0.1:8000/swagger/</a>
+
+![Screenshot from 2024-10-26 16-54-40](https://github.com/user-attachments/assets/6f968c84-7f7e-4c95-b563-990ca8a88470)
 
 
 <div>
