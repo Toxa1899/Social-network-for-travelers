@@ -1,39 +1,42 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [pull_request]
+name: CI Pipeline
+
+on: [push, pull_request]
+
 jobs:
-  run_unittests:
+  build_and_test:
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: ['3.8', '3.9', '3.10']
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: prediction
+          POSTGRES_USER: prediction
+          POSTGRES_PASSWORD: prediction
+      redis:
+        image: redis:latest
+        ports:
+          - 6379:6379
+
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install Dependencies
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and Run Docker Containers
         run: |
-          python3 -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Run Tests
+          docker compose -f docker-compose.prod.yml up --build -d
+          sleep 15  # Даем время для инициализации сервисов
+
+      - name: Run Tests with Coverage
         run: |
-          cd ./src
-          echo "SECRET_KEY = 'django-insecure-dummy-secret'" > ./proj/secrets.py
-          python3 manage.py test
-      - name: Update passed icon
-        uses: Sibz/github-status-action@v1
-        with: 
-          authToken: ${{secrets.GIT_TOKEN}}
-          context: 'CI CHECK'
-          description: 'Passed'
-          state: 'success'
-          sha: ${{github.event.pull_request.head.sha || github.sha}}
-      - name: Check coverage
+          docker compose exec web coverage run --source='applications' manage.py test applications/ --keepdb
+          docker compose exec web coverage report
+
+      - name: Stop and Clean up Docker Containers
+        if: always()
         run: |
-          python3 coverage_cicd.py
-        env:
-          COVERAGE_THRESHOLD: ${{vars.COVERAGE_THRESHOLD}}
+          docker compose down
