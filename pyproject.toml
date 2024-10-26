@@ -27,6 +27,7 @@ celery = "^5.4.0"
 redis = "^5.1.1"
 requests = "^2.32.3"
 coverage = "^7.6.4"
+gunicorn = "^23.0.0"
 
 
 [tool.poetry.group.docker.dependencies]
@@ -46,6 +47,9 @@ django-jazzmin = "^3.0.1"
 celery = "^5.4.0"
 redis = "^5.1.1"
 requests = "^2.32.3"
+coverage = "^7.6.4"
+gunicorn = "^23.0.0"
+
 
 [build-system]
 requires = ["poetry-core"]

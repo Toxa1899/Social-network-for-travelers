@@ -40,7 +40,7 @@ class Post(models.Model):
     )
 
     tags = models.ManyToManyField(
-        Tag, blank=True, null=True, related_name="posts", verbose_name="Тег"
+        Tag, blank=True, related_name="posts", verbose_name="Тег"
     )
 
     created_at = models.DateTimeField(

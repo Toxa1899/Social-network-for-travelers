@@ -6,11 +6,11 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class DatabaseSettings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
-    DB_NAME: SecretStr = Field("travel", env="DB_NAME")
-    DB_USER: SecretStr = Field(default="travel", env="DB_USER")
-    DB_PASSWORD: SecretStr = Field("password", env="DB_PASSWORD")
-    DB_HOST: str = Field("localhost", env="HOST")
-    DB_PORT: int = Field(5432, env="PORT")
+    DB_NAME: SecretStr = Field("prediction", env="DB_NAME")
+    DB_USER: SecretStr = Field(default="prediction", env="DB_USER")
+    DB_PASSWORD: SecretStr = Field("prediction", env="DB_PASSWORD")
+    DB_HOST: str = Field("postgres-db", env="DB_HOST")
+    DB_PORT: int = Field(5432, env="DB_PORT")
 
 
 class Settings(BaseSettings):
@@ -20,14 +20,22 @@ class Settings(BaseSettings):
     )
 
     db: DatabaseSettings = DatabaseSettings()
-    SECRET_KEY: SecretStr
-    CORS_ALLOWED_ORIGINS: str
-    DEBUG: bool
-    JWT_SECRET_KEY: SecretStr = Field(..., env="JWT_SECRET_KEY")
-    ACCESS_KEY: SecretStr
-    ALLOWED_HOSTS: SecretStr = Field("127.0.0.1", env="JWT_SECRET_KEY")
-    CELERY_BROKER_URL: str = Field("redis://127.0.0.1:6379/0", env="HOST")
-    CELERY_BROKER_TRANSPORT: str = Field("redis", env="HOST")
+    SECRET_KEY: SecretStr = Field("change_me", env="SECRET_KEY")
+    CORS_ALLOWED_ORIGINS: str = Field(
+        "http://localhost:3000", env="CORS_ALLOWED_ORIGINS"
+    )
+    DEBUG: bool = Field(True, env="DEBUG")
+    JWT_SECRET_KEY: SecretStr = Field("JWT_SECRET_KEY", env="JWT_SECRET_KEY")
+    ACCESS_KEY: SecretStr = Field(
+        "1d10f82dd4a2cc5b16a2f70590d3c3a9", env="ACCESS_KEY"
+    )
+    ALLOWED_HOSTS: SecretStr = Field("*", env="ALLOWED_HOSTS")
+    CELERY_BROKER_URL: str = Field(
+        "redis://127.0.0.1:6379/0", env="CELERY_BROKER_URL"
+    )
+    CELERY_BROKER_TRANSPORT: str = Field(
+        "redis", env="CELERY_BROKER_TRANSPORT"
+    )
     MEGABYTE_LIMIT: int = Field(5, env="MEGABYTE_LIMIT")
 
 

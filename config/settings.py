@@ -22,7 +22,9 @@ SECRET_KEY = settings.SECRET_KEY
 
 DEBUG = settings.DEBUG
 
-ALLOWED_HOSTS = settings.ALLOWED_HOSTS.get_secret_value().split(",")
+# ALLOWED_HOSTS = settings.ALLOWED_HOSTS.get_secret_value().split(",")
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -95,7 +97,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -130,14 +131,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = BASE_DIR / "mediafiles"
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

@@ -12,4 +12,10 @@ psycopg2-binary
 pillow
 django-cors-headers 
 django-filter
+django-jazzmin
+celery
+redis
+requests
 coverage
+pydantic
+pydantic-settings
