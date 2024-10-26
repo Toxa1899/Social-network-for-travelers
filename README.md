@@ -148,7 +148,7 @@ nano .env
 
 Запустите проект:
 ```javascript
-docker compose up -d --build
+sudo docker compose up -d --build
 ```
 
 
@@ -182,7 +182,7 @@ nano .env
 Запустите проект на хостинге:
 
 ```javascript
-docker compose -f docker-compose.prod.yml up  --build
+sudo docker compose -f docker-compose.prod.yml up  --build
 ```
 
 <div>
