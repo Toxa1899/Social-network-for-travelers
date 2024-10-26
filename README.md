@@ -16,7 +16,6 @@
 - **Celery 5.4.0**: Для обработки фоновых задач.
 - **Redis 5.1.1**: Используется как брокер сообщений для Celery.
 - **PostgreSQL**: Реляционная база данных (настраивается через Docker).
-- **Pillow 11.0.0**: Библиотека для работы с изображениями.
 - **Pydantic 2.9.2** и **Pydantic Settings 2.6.0**: Для валидации данных и работы с настройками.
 - **Gunicorn 23.0.0**: WSGI HTTP сервер для запуска Django приложений.
 - **Другие зависимости**: pre-commit, isort, black, flake8, drf-yasg, psycopg2-binary, django-filter, django-jazzmin, requests, coverage.
