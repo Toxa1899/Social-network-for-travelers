@@ -14,6 +14,7 @@ services:
       dockerfile: Dockerfile.prod
     volumes:
       - static_volume:/app/staticfiles
+      - media_volume:/app//mediafiles
     expose:
       - 8000
     networks:

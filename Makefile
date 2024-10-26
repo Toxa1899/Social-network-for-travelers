@@ -5,5 +5,5 @@ db:
 static:
 	python3 manage.py collectstatic
 
-run:
+r:
 	python3 manage.py runserver
