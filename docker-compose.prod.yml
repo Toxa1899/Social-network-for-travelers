@@ -87,6 +87,7 @@ services:
     build: ./nginx
     volumes:
       - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
     ports:
       - 80:80
     depends_on:
@@ -99,6 +100,7 @@ services:
 volumes:
   pg_data:
   static_volume:
+  media_volume:
 
 networks:
   prediction-network:
