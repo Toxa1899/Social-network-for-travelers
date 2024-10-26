@@ -151,6 +151,20 @@ nano .env
 docker compose -f docker-compose.prod.yml up  --build
 ```
 
+<div>
+  <h1>
+    STEP 4
+  </h1>
+</div>
+
+
+при успешном развертывании проект  , данные url будут доступны
+
+
+<a href="http://127.0.0.1:8000/redoc/">http://127.0.0.1:8000/redoc/</a>
+
+<a href="http://127.0.0.1:8000/swagger/">http://127.0.0.1:8000/swagger/</a>
+
 
 <div>
   <h1>
