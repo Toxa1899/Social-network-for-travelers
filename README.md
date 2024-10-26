@@ -57,6 +57,12 @@ password: root
 Если у вас уже установлен Docker, перейдите к следующему шагу . Для подробной информации об установке Docker на Ubuntu, пожалуйста, посетите [документацию Docker](https://docs.docker.com/engine/install/ubuntu/).
 
 
+Чтобы удалить все конфликтующие пакеты, выполните следующую команду:
+```javascript
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+```
+
+
 Set up Docker's apt repository.
 ```javascript
 # Add Docker's official GPG key:
