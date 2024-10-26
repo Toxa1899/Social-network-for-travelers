@@ -1,6 +1,5 @@
 version: '3.8'
 
-
 x-environment-defaults: &environment-defaults
   DB_NAME: "prediction"
   DB_USER: "prediction"
@@ -8,16 +7,15 @@ x-environment-defaults: &environment-defaults
   DB_HOST: "postgres-db"
 
 
-
 services:
   web:
     build:
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     volumes:
       - static_volume:/app/staticfiles
-    ports:
-      - 8000:8000
+    expose:
+      - 8000
     networks:
       - prediction-network
     depends_on:
@@ -28,7 +26,13 @@ services:
     env_file:
       - .env
     restart: on-failure:5
-
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/swagger/ || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    command: gunicorn --bind 0.0.0.0:8000 config.wsgi:application
 
   postgres-db:
     image: postgres:latest
@@ -42,7 +46,6 @@ services:
       - pg_data:/var/lib/postgresql/data
     networks:
       - prediction-network
-
 
   redis:
     image: redis:latest
@@ -62,7 +65,8 @@ services:
       - postgres-db
     networks:
       - prediction-network
-
+    environment:
+      <<: *environment-defaults
 
   celery-beat:
     build:
@@ -76,10 +80,21 @@ services:
       - postgres-db
     networks:
       - prediction-network
+    environment:
+      <<: *environment-defaults
 
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/app/staticfiles
+    ports:
+      - 80:80
+    depends_on:
+      - web
 
-  
-
+    networks:
+      - prediction-network
+      
 
 volumes:
   pg_data:
@@ -88,4 +103,5 @@ volumes:
 networks:
   prediction-network:
     driver: bridge
+
 

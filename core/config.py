@@ -36,6 +36,11 @@ class Settings(BaseSettings):
     CELERY_BROKER_TRANSPORT: str = Field(
         "redis", env="CELERY_BROKER_TRANSPORT"
     )
+
+    CELERY_RESULT_BACKEND: str = Field(
+        "redis://redis:6379/0", env="CELERY_RESULT_BACKEND"
+    )
+
     MEGABYTE_LIMIT: int = Field(5, env="MEGABYTE_LIMIT")
 
 

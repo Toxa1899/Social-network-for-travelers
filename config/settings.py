@@ -22,9 +22,9 @@ SECRET_KEY = settings.SECRET_KEY
 
 DEBUG = settings.DEBUG
 
-# ALLOWED_HOSTS = settings.ALLOWED_HOSTS.get_secret_value().split(",")
+ALLOWED_HOSTS = settings.ALLOWED_HOSTS.get_secret_value().split(",")
 # ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -216,6 +216,7 @@ LOGGING = {
 
 CELERY_BROKER_URL = settings.CELERY_BROKER_URL
 CELERY_BROKER_TRANSPORT = settings.CELERY_BROKER_TRANSPORT
+CELERY_RESULT_BACKEND = settings.CELERY_RESULT_BACKEND
 
 CELERY_BEAT_SCHEDULE = {
     "sample_task": {

@@ -14,6 +14,7 @@ def country_task():
     url = f"https://api.countrylayer.com/v2/all?access_key={settings.ACCESS_KEY.get_secret_value()}"
     response = requests.get(url)
     result = response.json()
+    print(result)
     for r in result:
         country_name = r.get("name", None)
         if country_name:
