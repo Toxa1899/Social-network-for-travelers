@@ -150,3 +150,17 @@ nano .env
 ```javascript
 docker compose -f docker-compose.prod.yml up  --build
 ```
+
+
+<div>
+  <h1>
+    Info
+  </h1>
+</div>
+
+
+
+При запуске контейнера автоматически выполняется скрипт initialize_db.py. Этот скрипт отвечает за инициализацию базы данных, включая запуск парсера стран и заполнение базы данных днями недели.
+
+в .env лежит ACCESS_KEY 
+пожалуйста замените его на свой данный ключ можно получить на <a href="https://countrylayer.com/">https://countrylayer.com/</a>
