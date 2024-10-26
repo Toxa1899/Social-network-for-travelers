@@ -17,4 +17,6 @@ class Command(BaseCommand):
             "Sunday",
         ]
         for d in data:
-            DaysOfWeek.objects.create(days_of_week=d)
+
+            if not DaysOfWeek.objects.filter(days_of_week=d).exists():
+                DaysOfWeek.objects.create(days_of_week=d)
