@@ -12,6 +12,11 @@ db.sqlite3-journal
 media
 .idea
 celery.logs
+staticfiles
+static
+media
+mediafiles
+
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
