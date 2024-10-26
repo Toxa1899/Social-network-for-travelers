@@ -134,7 +134,7 @@ class PostLiftSettings(models.Model):
     )
     start_date = models.DateField(verbose_name="Дата начала")
     end_date = models.DateField(verbose_name="Дата конца")
-    time = models.TimeField(verbose_name="Время")
+    time = models.TimeField(verbose_name="Время По KG")
 
     days_of_week = models.ManyToManyField(
         DaysOfWeek, verbose_name="дни недели "

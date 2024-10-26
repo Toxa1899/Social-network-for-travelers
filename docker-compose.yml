@@ -67,7 +67,7 @@ services:
   celery-beat:
     build:
       context: ./
-    command: celery -A prediction beat --loglevel=info
+    command: celery -A config beat --loglevel=info
     volumes:
       - ./:/app
     depends_on:
