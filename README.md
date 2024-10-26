@@ -30,6 +30,19 @@
 </div>
 
 
+<div>
+  <h1>
+    Info
+  </h1>
+</div>
+
+
+
+При запуске контейнера автоматически выполняется скрипт initialize_db.py. Этот скрипт отвечает за инициализацию базы данных, включая запуск парсера стран и заполнение базы данных днями недели.
+
+в .env лежит ACCESS_KEY 
+пожалуйста замените его на свой данный ключ можно получить на <a href="https://countrylayer.com/">https://countrylayer.com/</a>
+
 
 ## Шаг 1: Установка Docker
 
@@ -180,15 +193,4 @@ docker compose -f docker-compose.prod.yml up  --build
 ![Screenshot from 2024-10-26 16-54-40](https://github.com/user-attachments/assets/6f968c84-7f7e-4c95-b563-990ca8a88470)
 
 
-<div>
-  <h1>
-    Info
-  </h1>
-</div>
 
-
-
-При запуске контейнера автоматически выполняется скрипт initialize_db.py. Этот скрипт отвечает за инициализацию базы данных, включая запуск парсера стран и заполнение базы данных днями недели.
-
-в .env лежит ACCESS_KEY 
-пожалуйста замените его на свой данный ключ можно получить на <a href="https://countrylayer.com/">https://countrylayer.com/</a>
