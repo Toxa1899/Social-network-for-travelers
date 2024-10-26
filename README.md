@@ -147,7 +147,8 @@ nano .env
 ```
 Добавьте IP-адрес вашего хостинга в ALLOWED_HOSTS:
 
-![image](https://github.com/user-attachments/assets/28c3ef5e-cb3a-438d-aea2-7f30dbf2562c)
+![image (2)](https://github.com/user-attachments/assets/37e2e75b-c111-42b9-86f4-54aba5d36962)
+
 
 
 
